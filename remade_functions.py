@@ -1,13 +1,19 @@
 import matplotlib.pyplot as plt
 
 
+# y = kx + b
+# k = (y - b) / x
+# k = (y1 - y2) / (x1 - x2)
+# b = y2 - k*x2
+
 class Trapezoid:
     def __init__(self, params):
-        self.a = params[0]
-        self.b = params[1]
-        self.c = params[2]
-        self.d = params[3]
-        self.h = params[4]
+        n = params[0]
+        self.a = n - 2
+        self.b = n - 1
+        self.c = n + 1
+        self.d = n + 2
+        self.h = params[1]
         self.lst_y = []
         self.lst_x = []
         self.lst_h = []
@@ -85,7 +91,22 @@ def intersection(one_x, one_y, two_x, two_y):
     return max_y[::-1]
 
 
+class Controller:
+    def __init__(self, params):
+        self.x = Trapezoid(params[0]).trapezoid()
+        self.v = Trapezoid(params[1]).trapezoid()
+        self.w = Trapezoid(params[2]).trapezoid()
+
+
+class Rulers:
+    rule_x = Trapezoid([5, 1]).trapezoid()
+    rule_v = Trapezoid([5, 1]).trapezoid()
+    rule_w = Trapezoid([5, 1]).trapezoid()
+
+
 # def find_not_zero(lst_m):
+
+
 #     min_a = 2
 #     max_d = -0.5
 #     for i in lst_m:
@@ -97,47 +118,80 @@ def intersection(one_x, one_y, two_x, two_y):
 
 
 if __name__ == '__main__':
-    trap = Trapezoid(list(map(float, input().split())))
-    trap2 = Trapezoid(list(map(float, input().split())))
-    trap.trapezoid()
-    trap2.trapezoid()
-    point = intersection(trap.lst_x, trap.lst_y, trap2.lst_x, trap2.lst_y)
+    trap = Controller([[3, 1], [7, 0.7], [6, 0.8]])
 
-    plt.subplot(131)
-    plt.plot(trap.lst_x, trap.lst_y, 'b', trap2.lst_x, trap2.lst_y, 'r')
-    plt.scatter(point[0], point[1], color="#7B68EE")
+    point_x = intersection(trap.x[0], trap.x[1], Rulers.rule_x[0], Rulers.rule_x[1])
+    plt.subplot(141)
+    plt.plot(trap.x[0], trap.x[1], 'b', Rulers.rule_x[0], Rulers.rule_x[1], 'r')
+    plt.scatter(point_x[0], point_x[1], color="#7B68EE")
 
-    plt.subplot(132)
-    # Передача q
-    trunc_default = Trapezoid([1.0, 3.0, 6.0, 7.0, 1.0])
-    trunc = Trapezoid([1.0, 3.0, 6.0, 7.0, point[1]])
-    trunc_default.trapezoid()
-    trunc.trapezoid()
-    plt.plot(trunc_default.lst_x, trunc_default.lst_y, trunc.lst_x, trunc.lst_y, 'r--')
+    point_v = intersection(trap.v[0], trap.v[1], Rulers.rule_v[0], Rulers.rule_v[1])
+    plt.subplot(142)
+    plt.plot(trap.v[0], trap.v[1], 'b', Rulers.rule_v[0], Rulers.rule_v[1], 'r')
+    plt.scatter(point_v[0], point_v[1], color="#7B68EE")
 
-    plt.subplot(133)
-    trunc1 = Trapezoid([0.1, 0.2, 3.0, 5.8, 0.4])
-    trunc2 = Trapezoid([1.0, 4.0, 5.5, 9.0, 1])
-    trunc3 = Trapezoid([0.5, 2.0, 3.5, 7.0, 0.6])
+    point_w = intersection(trap.w[0], trap.w[1], Rulers.rule_w[0], Rulers.rule_w[1])
+    plt.subplot(143)
+    plt.plot(trap.w[0], trap.w[1], 'b', Rulers.rule_w[0], Rulers.rule_w[1], 'r')
+    plt.scatter(point_w[0], point_w[1], color="#7B68EE")
+
+    plt.subplot(144)
+    q_x = Trapezoid([3, point_x[1]])
+    q_x.trapezoid()
+    q_v = Trapezoid([7, point_v[1]])
+    q_v.trapezoid()
+    q_w = Trapezoid([6, point_w[1]])
+    q_w.trapezoid()
+    plt.plot(q_x.lst_x, q_x.lst_y, 'y', q_v.lst_x, q_v.lst_y, 'b', q_w.lst_x, q_w.lst_y, 'g')
 
     lst = []
-    lst.append(trunc1)
-    lst.append(trunc2)
-    lst.append(trunc3)
+    lst.append(q_x)
+    lst.append(q_v)
+    lst.append(q_w)
     f = func(lst)
     f = area(f)
-    print(f)
-    # print(find_not_zero(lst))
+    plt.xlabel('a center of mass ={}'.format(f))
 
-    trunc1.trapezoid()
-    trunc2.trapezoid()
-    trunc3.trapezoid()
-    plt.plot(trunc1.lst_x, trunc1.lst_y, 'r--')
-    plt.plot(trunc2.lst_x, trunc2.lst_y, 'b--')
-    plt.plot(trunc3.lst_x, trunc3.lst_y, 'g--')
-
+    print('a center of mass =', f)
     plt.show()
-# y = kx + b
-# k = (y - b) / x
-# k = (y1 - y2) / (x1 - x2)
-# b = y2 - k*x2
+
+    # trap = Trapezoid(list(map(float, input().split())))
+    # trap2 = Trapezoid(list(map(float, input().split())))
+    # trap.trapezoid()
+    # trap2.trapezoid()
+    # point = intersection(trap.lst_x, trap.lst_y, trap2.lst_x, trap2.lst_y)
+    #
+    # plt.subplot(131)
+    # plt.plot(trap.lst_x, trap.lst_y, 'b', trap2.lst_x, trap2.lst_y, 'r')
+    # plt.scatter(point[0], point[1], color="#7B68EE")
+    #
+    # plt.subplot(132)
+    # # Передача q
+    # trunc_default = Trapezoid([2, 1])
+    # trunc = Trapezoid([4, point[1]])
+    # trunc_default.trapezoid()
+    # trunc.trapezoid()
+    # plt.plot(trunc_default.lst_x, trunc_default.lst_y, trunc.lst_x, trunc.lst_y, 'r--')
+    #
+    # plt.subplot(133)
+    # trunc1 = Trapezoid([1.5, 0.4])
+    # trunc2 = Trapezoid([5, 1])
+    # trunc3 = Trapezoid([3, 0.6])
+    #
+    # lst = []
+    # lst.append(trunc1)
+    # lst.append(trunc2)
+    # lst.append(trunc3)
+    # f = func(lst)
+    # f = area(f)
+    # print(f)
+    # # print(find_not_zero(lst))
+    #
+    # trunc1.trapezoid()
+    # trunc2.trapezoid()
+    # trunc3.trapezoid()
+    # plt.plot(trunc1.lst_x, trunc1.lst_y, 'r--')
+    # plt.plot(trunc2.lst_x, trunc2.lst_y, 'b--')
+    # plt.plot(trunc3.lst_x, trunc3.lst_y, 'g--')
+    #
+    # plt.show()
