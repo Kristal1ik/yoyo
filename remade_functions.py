@@ -125,12 +125,12 @@ if __name__ == '__main__':
     point_x = intersection(trap.x[0], trap.x[1], Rulers.rule_x[0], Rulers.rule_x[1])
     plt.subplot(241)
     plt.plot(trap.x[0], trap.x[1], 'b', Rulers.rule_x[0], Rulers.rule_x[1], 'r')
-    plt.scatter(point_x[0], point_x[1], color="#FF69B4")
+    plt.scatter(point_x[0], point_x[1], color="#7B68EE")
 
     point_v = intersection(trap.v[0], trap.v[1], Rulers.rule_v[0], Rulers.rule_v[1])
     plt.subplot(242)
     plt.plot(trap.v[0], trap.v[1], 'b', Rulers.rule_v[0], Rulers.rule_v[1], 'r')
-    plt.scatter(point_v[0], point_v[1], color="#FF69B4")
+    plt.scatter(point_v[0], point_v[1], color="#7B68EE")
 
     plt.subplot(243)
     trunc1 = Trapezoid([3, find_min_point(point_x, point_v)])
