@@ -102,12 +102,36 @@ class Controller:
         self.v = Trapezoid(params[1]).trapezoid()
 
 
-class Rulers:
+class Rules:
+    w_fin = 6
+    w_1 = 3
+    w_2 = 5
     rule_x = Trapezoid([5.5, 1]).trapezoid()
     rule_v = Trapezoid([5, 1]).trapezoid()
+    rule_w = Trapezoid([w_1, 1]).trapezoid()
+    rule_w_2 = Trapezoid([w_2, 1]).trapezoid()
 
 
-# def find_not_zero(lst_m):
+
+def making_rules(n):
+    point_x = []
+    point_v = []
+    lst = []
+    for i in range(n):
+        lst_rules = []
+        for i in range(2):
+            rule = list(map(int, input().split()))
+            lst_rules.append(rule)
+        lst_rules = Controller(lst_rules)
+        point_x = intersection(lst_rules.x[0], lst_rules.x[1], Rules.rule_x[0], Rules.rule_x[1])
+        point_v = intersection(lst_rules.v[0], lst_rules.v[1], Rules.rule_v[0], Rules.rule_v[1])
+        trunc1 = Trapezoid([3, find_min_point(point_x, point_v)])
+        trunc1.trapezoid()
+        lst.append(trunc1)
+    print(lst)
+    f = func(lst)
+    f = area(f)
+    return f
 
 
 #     min_a = 2
@@ -122,49 +146,53 @@ class Rulers:
 
 if __name__ == '__main__':
     trap = Controller([[2, 1], [7, 1]])
-    point_x = intersection(trap.x[0], trap.x[1], Rulers.rule_x[0], Rulers.rule_x[1])
+    point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(241)
-    plt.plot(trap.x[0], trap.x[1], 'b', Rulers.rule_x[0], Rulers.rule_x[1], 'r')
+    plt.plot(trap.x[0], trap.x[1], 'b', Rules.rule_x[0], Rules.rule_x[1], 'r')
     plt.scatter(point_x[0], point_x[1], color="#7B68EE")
 
-    point_v = intersection(trap.v[0], trap.v[1], Rulers.rule_v[0], Rulers.rule_v[1])
+    point_v = intersection(trap.v[0], trap.v[1], Rules.rule_v[0], Rules.rule_v[1])
     plt.subplot(242)
-    plt.plot(trap.v[0], trap.v[1], 'b', Rulers.rule_v[0], Rulers.rule_v[1], 'r')
+    plt.plot(trap.v[0], trap.v[1], 'b', Rules.rule_v[0], Rules.rule_v[1], 'r')
     plt.scatter(point_v[0], point_v[1], color="#7B68EE")
+    print(point_v)
 
     plt.subplot(243)
-    trunc1 = Trapezoid([3, find_min_point(point_x, point_v)])
+    trunc1 = Trapezoid([Rules.w_1, find_min_point(point_x, point_v)])
     trunc1.trapezoid()
-    plt.plot(trunc1.lst_x, trunc1.lst_y, 'g')
+    plt.plot(Rules.rule_w[0], trunc1.lst_y, 'g', Rules.rule_w[0], Rules.rule_w[1])
 
     trap2 = Controller([[5, 1], [2, 1]])
 
-    point_x2 = intersection(trap2.x[0], trap2.x[1], Rulers.rule_x[0], Rulers.rule_x[1])
+    point_x2 = intersection(trap2.x[0], trap2.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(245)
-    plt.plot(trap2.x[0], trap2.x[1], 'b', Rulers.rule_x[0], Rulers.rule_x[1], 'r')
+    plt.plot(trap2.x[0], trap2.x[1], 'b', Rules.rule_x[0], Rules.rule_x[1], 'r')
     plt.scatter(point_x2[0], point_x2[1], color="#FF69B4")
 
-    point_v2 = intersection(trap2.v[0], trap2.v[1], Rulers.rule_v[0], Rulers.rule_v[1])
+    point_v2 = intersection(trap2.v[0], trap2.v[1], Rules.rule_v[0], Rules.rule_v[1])
     plt.subplot(246)
-    plt.plot(trap2.v[0], trap2.v[1], 'b', Rulers.rule_v[0], Rulers.rule_v[1], 'r')
+    plt.plot(trap2.v[0], trap2.v[1], 'b', Rules.rule_v[0], Rules.rule_v[1], 'r')
     plt.scatter(point_v2[0], point_v2[1], color="#FF69B4")
 
     plt.subplot(247)
-    trunc2 = Trapezoid([5, find_min_point(point_x2, point_v2)])
+    trunc2 = Trapezoid([Rules.w_2, find_min_point(point_x2, point_v2)])
     trunc2.trapezoid()
-    plt.plot(trunc2.lst_x, trunc2.lst_y, 'g')
+    plt.plot(Rules.rule_w_2[0], Rules.rule_w_2[1], trunc2.lst_x, trunc2.lst_y, 'g')
 
     lst = []
     lst.append(trunc1)
     lst.append(trunc2)
+    for i in lst:
+        print(type(i))
     f = func(lst)
     f = area(f)
     plt.subplot(144)
     plt.plot(trunc1.lst_x, trunc1.lst_y, trunc2.lst_x, trunc2.lst_y)
     plt.xlabel('a center of mass ={}'.format(f))
     print('a center of mass =', f)
-    plt.show()
 
+    print(making_rules(int(input())))
+    plt.show()
 
     # trap = Trapezoid(list(map(float, input().split())))
     # trap2 = Trapezoid(list(map(float, input().split())))
