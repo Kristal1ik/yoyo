@@ -64,18 +64,20 @@ def func(lst_m):
 
 
 def max_f(list_m, x):
-    y = [k.mu(x) for k in list_m]
+    y = [k.muh(x) for k in list_m]
     return max(y)
 
 
 def area(lst_y):
-    s = 0
+    integr1 = 0
+    integr2 = 0
     x = 0.01
     dx = 0.01
     for i in range(1000):
-        s += lst_y[i] * dx
+        integr1 += lst_y[i] * dx*x
+        integr2 += lst_y[i] * dx
         x += 0.01
-    return s
+    return integr1/integr2
 
 
 # Нахождение точки пересечения (y, x)
@@ -104,8 +106,8 @@ class Controller:
 
 class Rules:
     w_fin = 3
-    w_1 = 4
-    w_2 = 6
+    w_1 = 7
+    w_2 = 8
     rule_x = Trapezoid([5.5, 1]).trapezoid()
     rule_v = Trapezoid([5, 1]).trapezoid()
     rule_w = Trapezoid([w_1, 1]).trapezoid()
@@ -143,7 +145,7 @@ def making_rules(n):
 
 
 if __name__ == '__main__':
-    trap = Controller([[2, 1], [7, 1]])
+    trap = Controller([[6, 1], [8, 1]])
     point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(331)
     plt.plot(trap.x[0], trap.x[1], 'b', Rules.rule_x[0], Rules.rule_x[1], 'r')
@@ -159,7 +161,7 @@ if __name__ == '__main__':
     trunc1.trapezoid()
     plt.plot(Rules.rule_w[0], trunc1.lst_y, 'g', Rules.rule_w[0], Rules.rule_w[1])
 
-    trap2 = Controller([[5, 1], [2, 1]])
+    trap2 = Controller([[3, 1], [6, 1]])
 
     point_x2 = intersection(trap2.x[0], trap2.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(334)
@@ -188,6 +190,7 @@ if __name__ == '__main__':
     lst.append(trunc1)
     lst.append(trunc2)
     f = func(lst)
+
     f = area(f)
     plt.subplot(339)
     plt.plot(trunc1.lst_x, trunc1.lst_y, 'b', trunc2.lst_x, trunc2.lst_y, 'r')
@@ -197,7 +200,8 @@ if __name__ == '__main__':
     plt.xlabel('a center of mass ={}'.format(f))
     print('a center of mass =', f)
 
-    making = making_rules(int(input()))
+    # making = making_rules(int(input()))
+
     # lst_x = []
     # lst_y = making[0]
     # print(lst_y)
@@ -206,7 +210,6 @@ if __name__ == '__main__':
     #     lst_x.append(x)
     #     x += 0.01
     # plt.plot(lst_x, lst_y)
-
 
     # print(making_rules(int(input())))
     plt.show()
