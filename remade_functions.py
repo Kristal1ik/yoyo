@@ -59,7 +59,7 @@ def func(lst_m):
     for i in range(1000):
         lst_y.append(max_f(lst_m, x))
         x += 0.01
-    print(lst_y)
+    # print(lst_y)
     return lst_y
 
 
@@ -123,6 +123,7 @@ def making_rules(n):
         for i in range(2):
             rule = list(map(int, input().split()))
             lst_rules.append(rule)
+
         lst_rules = Controller(lst_rules)
         point_x = intersection(lst_rules.x[0], lst_rules.x[1], Rules.rule_x[0], Rules.rule_x[1])
         point_v = intersection(lst_rules.v[0], lst_rules.v[1], Rules.rule_v[0], Rules.rule_v[1])
@@ -131,7 +132,7 @@ def making_rules(n):
         lst.append(trunc1)
     f = func(lst)
     ff = area(f)
-    return f, ff
+    return ff
 
 
 #     min_a = 2
@@ -200,18 +201,7 @@ if __name__ == '__main__':
     plt.xlabel('a center of mass ={}'.format(f))
     print('a center of mass =', f)
 
-    # making = making_rules(int(input()))
-
-    # lst_x = []
-    # lst_y = making[0]
-    # print(lst_y)
-    # x = 0.01
-    # for i in range(1000):
-    #     lst_x.append(x)
-    #     x += 0.01
-    # plt.plot(lst_x, lst_y)
-
-    # print(making_rules(int(input())))
+    print(making_rules(int(input())))
     plt.show()
 
     # trap = Trapezoid(list(map(float, input().split())))
