@@ -132,6 +132,7 @@ def making_rules(n):
         lst.append(trunc1)
     f = func(lst)
     ff = area(f)
+    print(ff)
     return ff
 
 
