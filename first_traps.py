@@ -1,9 +1,9 @@
-from remade_functions import Controller, intersection, Rules, Trapezoid, \
-    find_min_point, func, area, making_rules
+from remade_functions import Controller, intersection, Trapezoid, \
+    find_min_point, func, area, Rules, making_rules
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    trap = Controller([[6, 1], [8, 1]])
+    trap = Controller([[6, 1], [-9, 1]])
     point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(331)
     plt.plot(trap.x[0], trap.x[1], 'b', Rules.rule_x[0], Rules.rule_x[1], 'r')
@@ -48,15 +48,21 @@ if __name__ == '__main__':
     lst.append(trunc1)
     lst.append(trunc2)
     f = func(lst)
-
-    f = area(f)
+    lst_x = []
+    shag = 0.01
+    for i in range(1000):
+        lst_x.append(shag)
+        shag += 0.01
     plt.subplot(339)
+    print(f)
+    plt.plot(lst_x, f)
+    f = area(f)
     plt.plot(trunc1.lst_x, trunc1.lst_y, 'b', trunc2.lst_x, trunc2.lst_y, 'r')
     plt.scatter(f, 0, color="#7B68EE")
     plt.scatter(f, 1, color="#7B68EE", alpha=0)
 
     plt.xlabel('a center of mass ={}'.format(f))
     print('a center of mass =', f)
-
-    print(making_rules(int(input())))
+    #
+    # print(making_rules(int(input())))
     plt.show()
