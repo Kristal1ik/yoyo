@@ -5,8 +5,10 @@ class Const:
     width = 500
     height = 300
     white = (255, 255, 255)
-    pink = (255, 228, 225)
-    beige = (250, 235, 215)
+    # pink = (255, 228, 225)
+    pink = (255, 0, 0)
+    # beige = (250, 235, 215)
+    beige = (0,0,0)
     speed = 5
     r = 20
 
