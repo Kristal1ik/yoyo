@@ -59,7 +59,7 @@ def func(lst_m):
     for i in range(1000):
         lst_y.append(max_f(lst_m, x))
         x += 0.01
-    # print(lst_y)
+    print(lst_y)
     return lst_y
 
 
@@ -77,6 +77,10 @@ def area(lst_y):
         integr1 += lst_y[i] * dx * x
         integr2 += lst_y[i] * dx
         x += 0.01
+    try:
+        integr1 / integr2
+    except ZeroDivisionError:
+        return 0
     return integr1 / integr2
 
 
@@ -89,7 +93,7 @@ def intersection(one_x, one_y, two_x, two_y):
         if round(one_y[i], 2) == round(two_y[i], 2) and one_y[i] != 0 and two_y != 0:
             lst_intersection.append([one_y[i], one_x[i]])
         else:
-            lst_intersection.append([0,0])
+            lst_intersection.append([0, 0])
         x += 0.01
     print(temp1)
     max_y = max(lst_intersection)
@@ -106,19 +110,24 @@ class Controller:
     def __init__(self, params):
         self.x = Trapezoid(params[0]).trapezoid()
         self.v = Trapezoid(params[1]).trapezoid()
-class Rules:
-    w_fin = 3
-    w_1 = 7
-    w_2 = 8
-    rule_x = Trapezoid([5.5, 1]).trapezoid()
-    rule_v = Trapezoid([5, 1]).trapezoid()
-    rule_w = Trapezoid([w_1, 1]).trapezoid()
-    rule_w_2 = Trapezoid([w_2, 1]).trapezoid()
 
-class Rules_consts:
-    w = randint(1, 9)
-    v = randint(1, 9)
-    x = randint(1, 9)
+
+class Rules:
+    num = 2
+    x1 = 3
+    x2 = 5
+    v1 = 5
+    v2 = 7
+    w1 = 7
+    w2 = 8
+    rule_x = Trapezoid([x1, 1]).trapezoid()
+    rule_v = Trapezoid([v1, 1]).trapezoid()
+    rule_w1 = Trapezoid([w1, 1]).trapezoid()
+
+    rule_x2 = Trapezoid([x2, 1]).trapezoid()
+    rule_v2 = Trapezoid([v2, 1]).trapezoid()
+    rule_w2 = Trapezoid([w2, 1]).trapezoid()
+
 
 
 def rules(n):
@@ -130,6 +139,7 @@ def rules(n):
         rule_v.append(Trapezoid([Rules_consts.v, 1]).trapezoid())
         w_1.append(Trapezoid([Rules_consts.w, 1]).trapezoid())
     return rule_x, rule_v, w_1
+
 
 def making_rules(n):
     point_x = []
@@ -151,7 +161,6 @@ def making_rules(n):
     ff = area(f)
     print(ff)
     return ff
-
 
 #     min_a = 2
 #     max_d = -0.5
