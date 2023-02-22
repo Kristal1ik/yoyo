@@ -28,8 +28,6 @@ def f(x, v, w):
         y_new = l
     if y_new < R:
         y_new = R
-    print(f"y_new = {y_new} v_new = {v_new}")
-
     return y_new, v_new
 # 
 # 
