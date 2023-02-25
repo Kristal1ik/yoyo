@@ -1,6 +1,3 @@
-from random import randint
-
-
 # y = kx + b
 # k = (y - b) / x
 # k = (y1 - y2) / (x1 - x2)
@@ -8,12 +5,19 @@ from random import randint
 
 class Trapezoid:
     def __init__(self, params):
-        n = params[0]
-        self.a = n - 2
-        self.b = n - 1
-        self.c = n + 1
-        self.d = n + 2
-        self.h = params[1]
+        if len(params) == 2:
+            n = params[0]
+            self.a = n - 2
+            self.b = n - 1
+            self.c = n + 1
+            self.d = n + 2
+            self.h = params[1]
+        elif len(params) == 5:
+            self.a = params[0]
+            self.b = params[1]
+            self.c = params[2]
+            self.d = params[3]
+            self.h = params[4]
         self.lst_y = []
         self.lst_x = []
         self.lst_h = []
@@ -31,7 +35,7 @@ class Trapezoid:
     def trapezoid(self):
         y = 0
         x = 0.01
-        for i in range(1000):
+        for i in range(5000):
             self.lst_x.append(float(x))
             y = self.mu(x)
             x += 0.01
@@ -56,7 +60,7 @@ class Trapezoid:
 def func(lst_m):
     lst_y = []
     x = 0.01
-    for i in range(1000):
+    for i in range(5000):
         lst_y.append(max_f(lst_m, x))
         x += 0.01
     print(lst_y)
@@ -73,7 +77,7 @@ def area(lst_y):
     integr2 = 0
     x = 0.01
     dx = 0.01
-    for i in range(1000):
+    for i in range(5000):
         integr1 += lst_y[i] * dx * x
         integr2 += lst_y[i] * dx
         x += 0.01
@@ -85,19 +89,31 @@ def area(lst_y):
 
 
 # Нахождение точки пересечения (y, x)
-def intersection(one_x, one_y, two_x, two_y):
-    lst_intersection = []
-    x = 0.01
-    temp1 = 0
-    for i in range(1000):
-        if round(one_y[i], 2) == round(two_y[i], 2) and one_y[i] != 0 and two_y != 0:
-            lst_intersection.append([one_y[i], one_x[i]])
-        else:
-            lst_intersection.append([0, 0])
-        x += 0.01
-    print(temp1)
-    max_y = max(lst_intersection)
-    return max_y[::-1]
+# def intersection(one_x, one_y, two_y):
+#     lst_intersection = []
+#     x = 0.01
+#     for i in range(5000):
+#         if round(one_y[i], 2) == round(two_y[i], 2) and one_y[i] != 0 and two_y != 0:
+#             lst_intersection.append([one_y[i], one_x[i]])
+#         else:
+#             lst_intersection.append([0, 0])
+#         x += 0.01
+#     max_y = max(lst_intersection)
+#     return max_y[::-1]
+
+def intersection(a1, b1, c1, d1, a2, b2, c2, d2):
+    if b2 <= c1 and b1 <= c2:
+        a1, a2 = a2, a1
+        b1, b2 = b2, b1
+        c1, c2 = c2, c1
+        d1, d2 = d2, d1
+    if c1 <= b2 and a2 <= d1:
+        x = max(a2, c1)
+        return (d1 - x) / (d1 - c1)
+    else:
+        return 0
+
+
 
 
 def find_min_point(p_x, p_v):
@@ -113,32 +129,54 @@ class Controller:
 
 
 class Rules:
-    num = 2
-    x1 = 3
-    x2 = 5
-    v1 = 5
-    v2 = 7
-    w1 = 7
-    w2 = 8
-    rule_x = Trapezoid([x1, 1]).trapezoid()
-    rule_v = Trapezoid([v1, 1]).trapezoid()
-    rule_w1 = Trapezoid([w1, 1]).trapezoid()
+    # # 1 правило
+    # x1 = Trapezoid([90, 140, 156, 175, 1]).trapezoid()
+    # v1 = Trapezoid([280, 351, 466, 616, 1]).trapezoid()
+    # w1 = [6000, 9500, 13550, 16350, 1]
+    #
+    # # 2 правило
+    # x2 = Trapezoid([270, 320, 336, 355, 1]).trapezoid()
+    # v2 = Trapezoid([-90, -19, 96, 246, 1]).trapezoid()
+    # w2 = [14000, 17550, 21550, 24350, 1]
+    #
+    # # 3 правило
+    # x3 = Trapezoid([10, 60, 76, 95, 1]).trapezoid()
+    # v3 = Trapezoid([280, 351, 466, 616, 1]).trapezoid()
+    # w3 = [6000, 9550, 13550, 16350, 1]
+    #
+    # # 4 правило
+    # x4 = Trapezoid([480, 530, 546, 565, 1]).trapezoid()
+    # v4 = Trapezoid([730, 801, 916, 1066, 1]).trapezoid()
+    # w4 = [20000, 23550, 27550, 30350, 1]
+    #
+    # # 5 правило
+    # x5 = Trapezoid([270, 320, 336, 355, 1]).trapezoid()
+    # v5 = Trapezoid([-90, -19, 96, 246, 1]).trapezoid()
+    # w5 = [20000, 23550, 27550, 303500, 1]
+    # 1 правило
+    x1 = Trapezoid([0.09, 0.14, 0.156, 0.175, 1]).trapezoid()
+    v1 = Trapezoid([0.280, 0.351, 0.466, 0.616, 1]).trapezoid()
+    w1 = [6.00, 9.550, 13.550, 16.350, 1]
 
-    rule_x2 = Trapezoid([x2, 1]).trapezoid()
-    rule_v2 = Trapezoid([v2, 1]).trapezoid()
-    rule_w2 = Trapezoid([w2, 1]).trapezoid()
+    # 2 правило
+    x2 = Trapezoid([0.270, 0.320, 0.336, 0.355, 1]).trapezoid()
+    v2 = Trapezoid([-0.09, -0.019, 0.096, 0.246, 1]).trapezoid()
+    w2 = [14.000, 17.550, 21.550, 24.350, 1]
 
+    # 3 правило
+    x3 = Trapezoid([0.010, 0.060, 0.076, 0.095, 1]).trapezoid()
+    v3 = Trapezoid([0.280, 0.351, 0.466, 0.616, 1]).trapezoid()
+    w3 = [6.000, 9.550, 13.550, 16.350, 1]
 
+    # 4 правило
+    x4 = Trapezoid([0.480, 0.530, 0.546, 0.565, 1]).trapezoid()
+    v4 = Trapezoid([0.730, 0.801, 0.916, 1.066, 1]).trapezoid()
+    w4 = [20.000, 23.550, 27.550, 30.350, 1]
 
-def rules(n):
-    w_1 = []
-    rule_x = []
-    rule_v = []
-    for i in range(n):
-        rule_x.append(Trapezoid([Rules_consts.x, 1]).trapezoid())
-        rule_v.append(Trapezoid([Rules_consts.v, 1]).trapezoid())
-        w_1.append(Trapezoid([Rules_consts.w, 1]).trapezoid())
-    return rule_x, rule_v, w_1
+    # 5 правило
+    x5 = Trapezoid([0.270, 0.320, 0.336, 0.355, 1]).trapezoid()
+    v5 = Trapezoid([-0.090, -0.019, 0.096, 0.246, 1]).trapezoid()
+    w5 = [20.000, 23.550, 27.550, 30.3500, 1]
 
 
 def making_rules(n):
