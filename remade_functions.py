@@ -89,34 +89,35 @@ def area(lst_y):
 
 
 # Нахождение точки пересечения (y, x)
-# def intersection(one_x, one_y, two_y):
-#     lst_intersection = []
-#     x = 0.01
-#     for i in range(5000):
-#         if round(one_y[i], 2) == round(two_y[i], 2) and one_y[i] != 0 and two_y != 0:
-#             lst_intersection.append([one_y[i], one_x[i]])
-#         else:
-#             lst_intersection.append([0, 0])
-#         x += 0.01
-#     max_y = max(lst_intersection)
-#     return max_y[::-1]
-
-def intersection(a1, b1, c1, d1, a2, b2, c2, d2):
-    if b2 <= c1 and b1 <= c2:
-        a1, a2 = a2, a1
-        b1, b2 = b2, b1
-        c1, c2 = c2, c1
-        d1, d2 = d2, d1
-    if c1 <= b2 and a2 <= d1:
-        x = max(a2, c1)
-        return (d1 - x) / (d1 - c1)
-    else:
-        return 0
+def intersection(one_x, one_y, two_y):
+    lst_intersection = []
+    x = 0.01
+    for i in range(5000):
+        if round(one_y[i], 2) == round(two_y[i], 2) and one_y[i] != 0 and two_y != 0:
+            lst_intersection.append([one_y[i], one_x[i]])
+        else:
+            lst_intersection.append([0, 0])
+        x += 0.01
+    max_y = max(lst_intersection)
+    return max_y[::-1]
+#
+# def intersection(a1, b1, c1, d1, a2, b2, c2, d2):
+#     if b2 <= c1 and b1 <= c2:
+#         a1, a2 = a2, a1
+#         b1, b2 = b2, b1
+#         c1, c2 = c2, c1
+#         d1, d2 = d2, d1
+#     if c1 <= b2 and a2 <= d1:
+#         x = max(a2, c1)
+#         return (d1 - x) / (d1 - c1)
+#     else:
+#         return 0
 
 
 
 
 def find_min_point(p_x, p_v):
+    print(p_x)
     if p_x[1] < p_v[1]:
         return p_x[1]
     return p_v[1]
