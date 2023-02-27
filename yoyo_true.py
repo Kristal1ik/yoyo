@@ -1,5 +1,5 @@
 import pygame
-from remade_functions import Controller, intersection, Trapezoid, \
+from remade_functions_numpy import Controller, intersection, Trapezoid, \
     find_min_point, func, area, Rules
 
 
@@ -68,12 +68,14 @@ while True:
     trap = Controller([[y_pos, 1], [v, 1]])
     point_x1 = intersection(trap.x[0], trap.x[1], Rules.x1[0], Rules.x1[1])
     point_v1 = intersection(trap.v[0], trap.v[1], Rules.v1[0], Rules.v1[1])
+    print(point_v1)
     trunc1 = Trapezoid([Rules.w1[0], Rules.w1[1], Rules.w1[2], Rules.w1[3], find_min_point(point_x1, point_v1)])
     trunc1.trapezoid()
 
 
     point_x2 = intersection(trap.x[0], trap.x[1], Rules.x2[0], Rules.x2[1])
     point_v2 = intersection(trap.v[0], trap.v[1], Rules.v2[0], Rules.v2[1])
+
     trunc2 = Trapezoid([Rules.w2[0], Rules.w2[1], Rules.w2[2], Rules.w2[3], find_min_point(point_x2, point_v2)])
     trunc2.trapezoid()
 
