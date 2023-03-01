@@ -1,9 +1,10 @@
-from remade_functions import Controller, intersection, Trapezoid, \
+from remade_functions_numpy import Controller, intersection, Trapezoid, \
     find_min_point, func, area, Rules
 import matplotlib.pyplot as plt
-
+import datetime
 
 if __name__ == '__main__':
+    start = datetime.datetime.now()
     trap = Controller([[6, 1], [4, 1]])
     point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(331)
@@ -20,7 +21,7 @@ if __name__ == '__main__':
     trunc1.trapezoid()
     plt.plot(Rules.rule_w1[0], trunc1.lst_y, 'g', Rules.rule_w1[0], Rules.rule_w1[1])
 
-    trap2 = Controller([[3, 1], [6, 1]])
+    trap2 = Controller([[2, 1], [6, 1]])
 
     point_x2 = intersection(trap2.x[0], trap2.x[1], Rules.rule_x[0], Rules.rule_x[1])
     plt.subplot(334)
@@ -34,7 +35,7 @@ if __name__ == '__main__':
 
     plt.subplot(336)
     trunc2 = Trapezoid([Rules.w2, find_min_point(point_x2, point_v2)])
-    trunc2.trapezoid()
+
     plt.plot(Rules.rule_w2[0], Rules.rule_w2[1], trunc2.lst_x, trunc2.lst_y, 'g')
 
     plt.subplot(337)
@@ -45,9 +46,26 @@ if __name__ == '__main__':
     plt.scatter(0, 1, color="#7B68EE", alpha=0)
     plt.plot(trunc2.lst_x, trunc2.lst_y, 'g')
 
+    trap = Controller([[6, 1], [4, 1]])
+    point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
+
+    point_v = intersection(trap.v[0], trap.v[1], Rules.rule_v[0], Rules.rule_v[1])
+
+    trunc3 = Trapezoid([Rules.w1, find_min_point(point_x, point_v)])
+    trunc3.trapezoid()
+
+    trap = Controller([[6, 1], [4, 1]])
+    point_x = intersection(trap.x[0], trap.x[1], Rules.rule_x[0], Rules.rule_x[1])
+
+    point_v = intersection(trap.v[0], trap.v[1], Rules.rule_v[0], Rules.rule_v[1])
+
+    trunc3 = Trapezoid([Rules.w1, find_min_point(point_x, point_v)])
+    trunc3.trapezoid()
+
     lst = []
     lst.append(trunc1)
     lst.append(trunc2)
+    lst.append(trunc3)
     f = func(lst)
     lst_x = []
     shag = 0.01
@@ -56,9 +74,9 @@ if __name__ == '__main__':
         shag += 0.01
     plt.subplot(339)
     print(f)
-    plt.plot(lst_x, f)
     f = area(f)
-    plt.plot(trunc1.lst_x, trunc1.lst_y, 'b', trunc2.lst_x, trunc2.lst_y, 'r')
+    plt.plot(trunc1.lst_x, trunc1.lst_y, 'g', trunc2.lst_x, trunc2.lst_y, 'g'
+                                                                          '')
     plt.scatter(f, 0, color="#7B68EE")
     plt.scatter(f, 1, color="#7B68EE", alpha=0)
 
@@ -66,4 +84,5 @@ if __name__ == '__main__':
     print('a center of mass =', f)
     #
     # print(making_rules(int(input())))
+    print(datetime.datetime.now() - start )
     plt.show()
