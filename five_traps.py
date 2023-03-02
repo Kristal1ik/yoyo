@@ -1,4 +1,4 @@
-from remade_functions import Controller, Rules_consts, intersection, rules, Trapezoid, find_min_point, func, area
+from remade_functions import Controller, intersection, Trapezoid, find_min_point, func, area
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
