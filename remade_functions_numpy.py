@@ -105,6 +105,7 @@ def intersection(one_x, one_y, two_x, two_y):
 
 
 def find_min_point(p_x, p_v):
+    print(p_x, p_v)
     if p_x[1] < p_v[1]:
         return p_x[1]
     return p_v[1]
