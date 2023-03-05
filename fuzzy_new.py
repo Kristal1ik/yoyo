@@ -178,19 +178,3 @@ def area(lst_w):
         return 0
     return integr1 / integr2
 
-
-if __name__ == '__main__':
-    lst = []
-    trap = Controller([[0.05, 1], [0, 1]]).return_()
-    trunc1 = Trapezoid([Rules.w1[0], Rules.w1[1], Rules.w1[2], Rules.w1[3], trap[0]]).trapezoid()
-    trunc2 = Trapezoid([Rules.w2[0], Rules.w2[1], Rules.w2[2], Rules.w2[3], trap[1]]).trapezoid()
-    trunc3 = Trapezoid([Rules.w3[0], Rules.w3[1], Rules.w3[2], Rules.w3[3], trap[2]]).trapezoid()
-    trunc4 = Trapezoid([Rules.w4[0], Rules.w4[1], Rules.w4[2], Rules.w4[3], trap[3]]).trapezoid()
-    trunc5 = Trapezoid([Rules.w5[0], Rules.w5[1], Rules.w5[2], Rules.w5[3], trap[4]]).trapezoid()
-    lst.append(trunc1)
-    lst.append(trunc2)
-    lst.append(trunc3)
-    lst.append(trunc4)
-    lst.append(trunc5)
-    w = area(lst)
-    print(w)
