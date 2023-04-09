@@ -41,7 +41,7 @@ if __name__ == '__main__':
     x, v = x0, v0
     for i in range(0, int(T / dt)):
         lst = []
-        trap = Controller([[x, 1], [v, 1]]).return_()
+        trap = Controller(x, v).return_()
         trunc1 = Trapezoid([Rules.w1[0], Rules.w1[1], Rules.w1[2], Rules.w1[3], trap[0]])
         trunc2 = Trapezoid([Rules.w2[0], Rules.w2[1], Rules.w2[2], Rules.w2[3], trap[1]])
         trunc3 = Trapezoid([Rules.w3[0], Rules.w3[1], Rules.w3[2], Rules.w3[3], trap[2]])
@@ -55,7 +55,6 @@ if __name__ == '__main__':
         w = area(lst)
         x, v = f(x, v, w)
         # x, v = f(x, v, 0)
-        print(w)
         data_x.append(x)
         data_t.append(i)
 
