@@ -11,8 +11,6 @@ T = 60
 x0 = 0.05
 v0 = 0
 l = 0.5
-x1 = 0.2
-x2 = 0.3
 F1 = -20
 F2 = 20
 k = 0.1
@@ -61,4 +59,6 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
     ax.plot(data_t, data_x)
     ax.scatter(0, l, alpha=0)
+    ax.scatter(0, 0, alpha=0)
+
     plt.show()
