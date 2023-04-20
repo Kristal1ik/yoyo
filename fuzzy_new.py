@@ -1,6 +1,7 @@
 import numpy as np
 
 
+# Центр масс
 def area(lst_w):
     dx = 0.1
     integr1 = 0
@@ -20,7 +21,9 @@ def area(lst_w):
         return 0
 
 
+# Класс нечетких чисел в 2-х мерном пространстве (x, y(h))
 class Trapezoid:
+    # Фаззификация
     def __init__(self, params):
         if len(params) == 5:
             self.a = params[0]
@@ -35,6 +38,7 @@ class Trapezoid:
             self.d = params[0] + params[4]
             self.h = 1
 
+    # Нахождение соответствующего y для заданного x
     def mu(self, x):
         y = 0
         if (x >= self.a) and (x <= self.b):
@@ -45,10 +49,12 @@ class Trapezoid:
             y = 1 - ((x - self.c) / (self.d - self.c))
         return y
 
+    # Для центроида
     def muh(self, x):
         return min(self.h, self.mu(x))
 
 
+# Обработка наблюдаемых значений (x-положение, v=скорость)
 class Controller:
     def __init__(self, x, v):
         self.x = Trapezoid([x, 0.05, 0.008, 0.008, 0.019, 0])
@@ -89,6 +95,7 @@ class Controller:
         else:
             return True
 
+    # Нахождение точки пересечкния двух фаззифицированных чисел (x, v)
     def intersection(self, a1, b1, c1, d1, a2, b2, c2, d2):
         b = self.cross_bool(b1, c1, b2, c2)
         if b:
@@ -105,12 +112,15 @@ class Controller:
 
         return (d1 - x) / (d1 - c1)
 
+    # Нахождение минимальной точки пересечения
     def find_min_point(self, p_xv):
         return min(p_xv)
 
     def return_(self):
         return self.y1, self.y2, self.y3, self.y4, self.y5
 
+
+# Класс правил
 class Rules:
     x1 = Trapezoid([0.09, 0.14, 0.156, 0.175, 1])
     v1 = Trapezoid([0.280, 0.351, 0.466, 0.616, 1])

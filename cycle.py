@@ -17,6 +17,7 @@ k = 0.1
 e = 0.000001
 
 
+# Физическое поведение маятника
 def f(x, v, w):
     a = (m * r * r * (g - w)) / (0.5 * (m * R * R + maxis * r * r) + (m + maxis) * r * r)
     if (x == R and v < 0) or (x == l and v > 0):
