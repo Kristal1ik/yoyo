@@ -21,6 +21,8 @@ e = 0.000001
 
 mamd = 4
 space = 60
+
+
 def f(x, v, w):
     a = (m * r * r * (g - w)) / (0.5 * (m * R * R + maxis * r * r) + (m + maxis) * r * r)
     if (x == R and v < 0) or (x == l and v > 0):
@@ -34,6 +36,7 @@ def f(x, v, w):
 
     return xnew, vnew
 
+
 # Сортировка по 4 элемента (условие каждого правила состоит из 4 чисел)
 def sorted_four(lst):
     lst_new = []
@@ -44,6 +47,7 @@ def sorted_four(lst):
         for j in i:
             lst_fin.append(j)
     return lst_fin
+
 
 # Объединение сгенерированных правил в один массив
 def union(x, v, w):
@@ -58,7 +62,7 @@ def union(x, v, w):
     print(lst_fin)
     return lst_fin
 
-
+# Комментарии по этому классу в fuzzy_new.py (Этот контроллер не связан с тем. Они разделены, т.к. для оптимизации нужно менять правила)
 class Controller:
     def __init__(self, x, v):
         global x1, v1, w1, x2, v2, w2, x3, v3, w3, x4, v4, w4, x5, v5, w5
@@ -184,6 +188,7 @@ def objective(lst):
     return -counter
 
 
+# Генерация случайных чисел для правил
 pt_x = np.random.uniform(0.05, 0.5, 20)
 pt_x = sorted_four(pt_x)
 pt_v = np.random.uniform(-1, 1, 20)
@@ -194,6 +199,8 @@ pt = union(pt_x, pt_v, pt_w)
 
 start = datetime.now()
 
+
+# Basin hopping ("Черный ящик")
 print(f"len={len(pt)}")
 print(objective(pt))
 result = basinhopping(objective, pt, stepsize=0.1, niter=100)
