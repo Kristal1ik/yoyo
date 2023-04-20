@@ -200,7 +200,7 @@ pt = union(pt_x, pt_v, pt_w)
 start = datetime.now()
 
 
-# Basin hopping ("Черный ящик")
+# Basin hopping 
 print(f"len={len(pt)}")
 print(objective(pt))
 result = basinhopping(objective, pt, stepsize=0.1, niter=100)
