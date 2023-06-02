@@ -299,15 +299,15 @@ y = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 51, 51, 51,
 
 count = 0
 for i in range(len(y)):
-    screen.fill((0, 0, 0))
+    screen.fill((255, 255, 255))
     pygame.time.delay(5)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    pygame.draw.line(screen, (255, 0, 0), (0, 123), (Const.width, 123), 2)
-    pygame.draw.line(screen, (255, 0, 0), (0, 350), (Const.width, 350), 2)
+    # pygame.draw.line(screen, (255, 0, 0), (0, 123), (Const.width, 123), 2)
+    # pygame.draw.line(screen, (255, 0, 0), (0, 350), (Const.width, 350), 2)
 
-    pygame.draw.line(screen, Const.beige, (int(x_pos), y[i] - int(Const.r) * 10000), (Const.width // 2, 0), 5)
-    pygame.draw.circle(screen, Const.green, (int(x_pos), y[i]), int(Const.r * 10000))
+    pygame.draw.line(screen, (155, 155, 182), (int(x_pos), y[i] - int(Const.r) * 10000), (Const.width // 2, 0), 5)
+    pygame.draw.circle(screen, (187, 219, 241), (int(x_pos), y[i]), int(Const.r * 10000))
     pygame.display.update()
