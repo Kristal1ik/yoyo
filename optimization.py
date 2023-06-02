@@ -1,9 +1,12 @@
 from datetime import datetime
 
-import numpy as np
 from scipy.optimize import basinhopping
 from fuzzy_new import Trapezoid, area
 
+x_start = float(input())
+x_finish = float(input())
+iterations = int(input())
+step = float(input())
 out = 0
 global x1, v1, w1, x2, v2, w2, x3, v3, w3, x4, v4, w4, x5, v5, w5
 g = 9.8
@@ -18,7 +21,8 @@ F1 = -20
 F2 = 20
 k = 0.1
 e = 0.000001
-
+x0 = 0.05
+v0 = 0
 mamd = 4
 space = 60
 
@@ -54,13 +58,13 @@ def union(x, v, w):
     lst_rules = []
     lst_fin = []
     for i in range(0, space, mamd):
-        print(i)
         lst_rules.append([*x[i:i + mamd], *v[i:i + mamd], *w[i:i + mamd]])
     for i in lst_rules:
         for j in i:
             lst_fin.append(j)
     print(lst_fin)
     return lst_fin
+
 
 # Комментарии по этому классу в fuzzy_new.py (Этот контроллер не связан с тем. Они разделены, т.к. для оптимизации нужно менять правила)
 class Controller:
@@ -128,7 +132,6 @@ class Controller:
 def objective(lst):
     global x1, v1, w1, x2, v2, w2, x3, v3, w3, x4, v4, w4, x5, v5, w5
 
-    x, v = 0.5, 0
     x1 = Trapezoid([lst[0], lst[1], lst[2], lst[3], 1])
     v1 = Trapezoid([lst[4], lst[5], lst[6], lst[7], 1])
     w1 = [lst[8], lst[9], lst[10], lst[11], 1]
@@ -153,7 +156,8 @@ def objective(lst):
     v5 = Trapezoid([lst[52], lst[53], lst[54], lst[55], 1])
     w5 = [lst[56], lst[57], lst[58], lst[59], 1]
     counter = 0
-    for i in range(1000):
+    x, v = x0, v0
+    for i in range(3000):
         lst = []
         trap = Controller(x, v).return_()
         trunc1 = Trapezoid([w1[0], w1[1], w1[2], w1[3], trap[0]])
@@ -173,13 +177,13 @@ def objective(lst):
         #     w_null += 1
         # else:
         #     w_null = 0
-        # if 0.3 >= x > 0.285 or 0.215 > x >= 0.2:
-        #     # print(counter, (datetime.now() - start), lst if (datetime.now() - start).total_seconds() > 10 else None)
-        #     counter += 1
+        if (x >= x_start) and (x <= x_finish):
+            # print(counter, (datetime.now() - start), lst if (datetime.now() - start).total_seconds() > 10 else None)
+            counter += 1
         # if x > 0.3 or x < 0.2:
         #     counter -= 1
-        if 0.3 <= x <= 0.4:
-            counter += 1
+        # if 0.3 <= x <= 0.4:
+        #     counter += 1
         out += 1
         # if (w_prev - w) > ((2 * h) / 3):
         #     counter -= 1
@@ -189,33 +193,33 @@ def objective(lst):
 
 
 # Генерация случайных чисел для правил
-pt_x = np.random.uniform(0.05, 0.5, 20)
-pt_x = sorted_four(pt_x)
-pt_v = np.random.uniform(-1, 1, 20)
-pt_v = sorted_four(pt_v)
-pt_w = np.random.uniform(0, 30, 20)
-pt_w = sorted_four(pt_w)
-pt = union(pt_x, pt_v, pt_w)
+# pt_x = np.random.uniform(0.05, 0.5, 20)
+# pt_x = sorted_four(pt_x)
+# pt_v = np.random.uniform(-5, 5, 20)
+# pt_v = sorted_four(pt_v)
+# pt_w = np.random.uniform(0, 40, 20)
+# pt_w = sorted_four(pt_w)
+# pt = union(pt_x, pt_v, pt_w)
 
 start = datetime.now()
 
-
-# Basin hopping 
+pt = [0.09, 0.14, 0.156, 0.175, 0.280, 0.351, 0.466, 0.616, 6.00, 9.550, 13.550, 16.350,
+      0.270, 0.320, 0.336, 0.355, -0.09, -0.019, 0.096, 0.246, 14.000, 17.550, 21.550, 24.350,
+      0.010, 0.060, 0.076, 0.095, 0.280, 0.351, 0.466, 0.616, 6.000, 9.550, 13.550, 16.350,
+      0.480, 0.530, 0.546, 0.565, 0.730, 0.801, 0.916, 1.066, 20.000, 23.550, 27.550, 30.350,
+      0.270, 0.320, 0.336, 0.355, -0.090, -0.019, 0.096, 0.246, 20.000, 23.550, 27.550, 30.3500]
+# Basin hopping
 print(f"len={len(pt)}")
 print(objective(pt))
-result = basinhopping(objective, pt, stepsize=0.1, niter=100)
+result = basinhopping(objective, pt, stepsize=step, niter=iterations)
 print('Status : %s' % result['message'])
 print('Total Evaluations: %d' % result['nfev'])
 solution = result['x']
 evaluation = objective(solution)
 print('Solution: f(%s) = %.5f' % (solution, evaluation))
-print(datetime.now() - start)
+# print(datetime.now() - start)
 
-# pt = [0.09, 0.14, 0.156, 0.175, 0.280, 0.351, 0.466, 0.616, 6.00, 9.550, 13.550, 16.350,
-#       0.270, 0.320, 0.336, 0.355, -0.09, -0.019, 0.096, 0.246, 14.000, 17.550, 21.550, 24.350,
-#       0.010, 0.060, 0.076, 0.095, 0.280, 0.351, 0.466, 0.616, 6.000, 9.550, 13.550, 16.350,
-#       0.480, 0.530, 0.546, 0.565, 0.730, 0.801, 0.916, 1.066, 20.000, 23.550, 27.550, 30.350,
-#       0.270, 0.320, 0.336, 0.355,-0.090, -0.019, 0.096, 0.246, 20.000, 23.550, 27.550, 30.3500]
+
 # pt = [0.59, 0.64, 0.656, 0.675, 0.780, 0.851, 0.966, 1.116, 6.50, 10.050, 14.050, 11.850,
 #       0.270, 0.320, 0.336, 0.355, -0.09, -0.019, 0.096, 0.246, 14.000, 17.550, 21.550, 24.350,
 #       0.010, 0.060, 0.076, 0.095, 0.280, 0.351, 0.466, 0.616, 6.000, 9.550, 13.550, 16.350,
