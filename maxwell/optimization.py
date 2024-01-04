@@ -1,10 +1,10 @@
 from datetime import datetime
-
+import numpy as np
 from scipy.optimize import basinhopping
 from fuzzy_new import Trapezoid, area
 
-x_start = float(input())
-x_finish = float(input())
+x_start = float(input())  # верхняя граница
+x_finish = float(input())  # нижняя граница
 iterations = int(input())
 step = float(input())
 out = 0
@@ -193,21 +193,21 @@ def objective(lst):
 
 
 # Генерация случайных чисел для правил
-# pt_x = np.random.uniform(0.05, 0.5, 20)
-# pt_x = sorted_four(pt_x)
-# pt_v = np.random.uniform(-5, 5, 20)
-# pt_v = sorted_four(pt_v)
-# pt_w = np.random.uniform(0, 40, 20)
-# pt_w = sorted_four(pt_w)
-# pt = union(pt_x, pt_v, pt_w)
+pt_x = np.random.uniform(0.05, 0.5, 20)
+pt_x = sorted_four(pt_x)
+pt_v = np.random.uniform(-5, 5, 20)
+pt_v = sorted_four(pt_v)
+pt_w = np.random.uniform(0, 40, 20)
+pt_w = sorted_four(pt_w)
+pt = union(pt_x, pt_v, pt_w)
 
 start = datetime.now()
 
-pt = [0.09, 0.14, 0.156, 0.175, 0.280, 0.351, 0.466, 0.616, 6.00, 9.550, 13.550, 16.350,
-      0.270, 0.320, 0.336, 0.355, -0.09, -0.019, 0.096, 0.246, 14.000, 17.550, 21.550, 24.350,
-      0.010, 0.060, 0.076, 0.095, 0.280, 0.351, 0.466, 0.616, 6.000, 9.550, 13.550, 16.350,
-      0.480, 0.530, 0.546, 0.565, 0.730, 0.801, 0.916, 1.066, 20.000, 23.550, 27.550, 30.350,
-      0.270, 0.320, 0.336, 0.355, -0.090, -0.019, 0.096, 0.246, 20.000, 23.550, 27.550, 30.3500]
+# pt = [0.09, 0.14, 0.156, 0.175, 0.280, 0.351, 0.466, 0.616, 6.00, 9.550, 13.550, 16.350,
+#       0.270, 0.320, 0.336, 0.355, -0.09, -0.019, 0.096, 0.246, 14.000, 17.550, 21.550, 24.350,
+#       0.010, 0.060, 0.076, 0.095, 0.280, 0.351, 0.466, 0.616, 6.000, 9.550, 13.550, 16.350,
+#       0.480, 0.530, 0.546, 0.565, 0.730, 0.801, 0.916, 1.066, 20.000, 23.550, 27.550, 30.350,
+#       0.270, 0.320, 0.336, 0.355, -0.090, -0.019, 0.096, 0.246, 20.000, 23.550, 27.550, 30.3500]
 # Basin hopping
 print(f"len={len(pt)}")
 print(objective(pt))

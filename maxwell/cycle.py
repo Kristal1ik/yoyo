@@ -142,7 +142,7 @@ if __name__ == '__main__':
         lst.append(trunc4)
         lst.append(trunc5)
         w = area(lst)
-        x, v = f(x, v, 10)
+        x, v = f(x, v, w)
         # x, v = f(x, v, 0)
         # print(w)
         data_x.append(w)
