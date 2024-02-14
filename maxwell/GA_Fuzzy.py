@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 x_start = float(input())
 x_finish = float(input())
-individuals = int(input())
-generations = int(input())
+individuals = int(input())  # Особи
+generations = int(input())  # Поколения
 
 out = 0
 global x1, v1, w1, x2, v2, w2, x3, v3, w3, x4, v4, w4, x5, v5, w5
