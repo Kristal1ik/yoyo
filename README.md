@@ -1,2 +1,2 @@
 # yoyo
-The Maxwell's pendulum
+Fuzzy controllers
