@@ -1,8 +1,12 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QWidget
+from flask import Flask, render_template
+
+app = Flask("name")
+
+
+@app.route('/')
+def hello_world():
+    return render_template("main.html")
+
+
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    w = QWidget()
-    w.resize(300,300)
-    w.show()
-    sys.exit(app.exec_())
+    app.run(debug=True)
