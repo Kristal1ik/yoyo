@@ -1,0 +1,86 @@
+/*= Style for mainwindow START
+  ==================================================== */
+	#MainWindow {
+		background-color: #ffffff;
+	}
+/*= END
+  ==================================================== */
+
+
+
+/*= Style for menu with icon only START
+  ==================================================== */
+  	/* style for widget */
+	#icon_only_widget {
+		background-color: #000000;
+		width:50px;
+	}
+
+    /* style for QPushButton and QLabel */
+	#icon_only_widget QPushButton, QLabel {
+		height:50px;
+		border:none;
+		color: #000000
+	}
+
+	#icon_only_widget QPushButton:hover {
+		background-color: #0000ff;
+		color: #000000
+	}
+
+
+/*= END
+  ==================================================== */
+
+/*= Style for menu with icon and text START
+  ==================================================== */
+	/* style for widget */
+	#full_menu_widget {
+		background-color: #0000ff;
+		padding-top: 100px;
+	}
+	#gridLayout_2{
+			background-color: #f6f6ff;
+	}
+
+	/* style for QPushButton */
+	#full_menu_widget QPushButton {
+		border:none;
+		border-radius: 3px;
+		text-align: left;
+		padding: 8px 15px 8px 15px;
+		color: #ffffff;
+	}
+
+	#full_menu_widget QPushButton:hover {
+		background-color: #ffffff;
+		color: #0000ff
+	}
+
+	#full_menu_widget QPushButton:checked {
+		color: #0000ff;
+		background-color: #ffffff;
+	}
+	/* style for QPushButton */
+	#save_btn QPushButton {
+		border:none;
+		border-radius: 3px;
+		text-align: left;
+		padding: 8px 15px 8px 15px;
+		color: #ffffff;
+	}
+
+	/* style for logo image */
+	#logo_label_2 {
+		padding: 5px;
+		color: #ffffff;
+	}
+
+	/* style for APP title */
+	#name {
+		padding: 8px 15px 50px 10px;
+		color: #ffffff;
+	}
+/*= END
+  ==================================================== */
+
