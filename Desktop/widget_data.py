@@ -3,127 +3,238 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
-        Form.setObjectName("widget_data")
-        Form.resize(500, 500)
-        self.verticalLayoutWidget = QtWidgets.QWidget(Form)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(9, 49, 300, 300))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        Form.setObjectName("Form")
+        Form.resize(716, 409)
+        Form.setStyleSheet("background-color: rgb(246, 246, 255);")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout_8.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setContentsMargins(15, 25, 15, 10)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.params_1 = QtWidgets.QFrame(Form)
+        self.params_1.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius: 20px; \n"
+"")
+        self.params_1.setObjectName("params_1")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.params_1)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.label_50 = QtWidgets.QLabel(self.params_1)
+        self.label_50.setStyleSheet("color: rgb(0, 0, 255);\n"
+"font: 300 24px\"Segoe UI\"; padding-top:10px;\n"
+"")
+        self.label_50.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_50.setObjectName("label_50")
+        self.verticalLayout_3.addWidget(self.label_50)
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setObjectName("formLayout")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.horizontalLayout1_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_2.setObjectName("horizontalLayout1_2")
-        self.label_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout1_2.addWidget(self.label_4)
-        self.lineEdit_8 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_8.setObjectName("lineEdit_8")
-        self.horizontalLayout1_2.addWidget(self.lineEdit_8)
-        self.verticalLayout.addLayout(self.horizontalLayout1_2)
-        self.horizontalLayout1_5 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_5.setObjectName("horizontalLayout1_5")
-        self.label_8 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_8.setObjectName("label_8")
-        self.horizontalLayout1_5.addWidget(self.label_8)
-        self.lineEdit_11 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_11.setObjectName("lineEdit_11")
-        self.horizontalLayout1_5.addWidget(self.lineEdit_11)
-        self.verticalLayout.addLayout(self.horizontalLayout1_5)
-        self.horizontalLayout1_8 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_8.setObjectName("horizontalLayout1_8")
-        self.label_11 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_11.setObjectName("label_11")
-        self.horizontalLayout1_8.addWidget(self.label_11)
-        self.lineEdit_14 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_14.setObjectName("lineEdit_14")
-        self.horizontalLayout1_8.addWidget(self.lineEdit_14)
-        self.verticalLayout.addLayout(self.horizontalLayout1_8)
-        self.horizontalLayout1_7 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_7.setObjectName("horizontalLayout1_7")
-        self.label_10 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_10.setObjectName("label_10")
-        self.horizontalLayout1_7.addWidget(self.label_10)
-        self.lineEdit_13 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_13.setObjectName("lineEdit_13")
-        self.horizontalLayout1_7.addWidget(self.lineEdit_13)
-        self.verticalLayout.addLayout(self.horizontalLayout1_7)
-        self.horizontalLayout1_6 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_6.setObjectName("horizontalLayout1_6")
-        self.label_9 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_9.setObjectName("label_9")
-        self.horizontalLayout1_6.addWidget(self.label_9)
-        self.lineEdit_12 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_12.setObjectName("lineEdit_12")
-        self.horizontalLayout1_6.addWidget(self.lineEdit_12)
-        self.verticalLayout.addLayout(self.horizontalLayout1_6)
-        self.horizontalLayout1 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1.setObjectName("horizontalLayout1")
-        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout1.addWidget(self.label_2)
-        self.lineEdit_6 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_6.setObjectName("lineEdit_6")
-        self.horizontalLayout1.addWidget(self.lineEdit_6)
-        self.verticalLayout.addLayout(self.horizontalLayout1)
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(Form)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(325, -40, 300, 300))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_48 = QtWidgets.QLabel(self.params_1)
+        self.label_48.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_48.setObjectName("label_48")
+        self.verticalLayout.addWidget(self.label_48)
+        self.label_51 = QtWidgets.QLabel(self.params_1)
+        self.label_51.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_51.setObjectName("label_51")
+        self.verticalLayout.addWidget(self.label_51)
+        self.label_52 = QtWidgets.QLabel(self.params_1)
+        self.label_52.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_52.setObjectName("label_52")
+        self.verticalLayout.addWidget(self.label_52)
+        self.label_53 = QtWidgets.QLabel(self.params_1)
+        self.label_53.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_53.setObjectName("label_53")
+        self.verticalLayout.addWidget(self.label_53)
+        self.label_54 = QtWidgets.QLabel(self.params_1)
+        self.label_54.setStyleSheet("color: rgb(45, 44, 45);color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_54.setObjectName("label_54")
+        self.verticalLayout.addWidget(self.label_54)
+        self.label_55 = QtWidgets.QLabel(self.params_1)
+        self.label_55.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\"; ")
+        self.label_55.setObjectName("label_55")
+        self.verticalLayout.addWidget(self.label_55)
+        self.label_56 = QtWidgets.QLabel(self.params_1)
+        self.label_56.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_56.setObjectName("label_56")
+        self.verticalLayout.addWidget(self.label_56)
+        self.label_57 = QtWidgets.QLabel(self.params_1)
+        self.label_57.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_57.setObjectName("label_57")
+        self.verticalLayout.addWidget(self.label_57)
+        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.verticalLayout)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_5 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.label_5.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
-        self.label_5.setObjectName("label_5")
-        self.verticalLayout_2.addWidget(self.label_5)
-        self.horizontalLayout1_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_3.setObjectName("horizontalLayout1_3")
-        self.label_6 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.label_6.setObjectName("label_6")
-        self.horizontalLayout1_3.addWidget(self.label_6)
-        self.lineEdit_9 = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit_9.setObjectName("lineEdit_9")
-        self.horizontalLayout1_3.addWidget(self.lineEdit_9)
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_3)
-        self.horizontalLayout1_9 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_9.setObjectName("horizontalLayout1_9")
-        self.label_12 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.label_12.setObjectName("label_12")
-        self.horizontalLayout1_9.addWidget(self.label_12)
-        self.lineEdit_15 = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit_15.setObjectName("lineEdit_15")
-        self.horizontalLayout1_9.addWidget(self.lineEdit_15)
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_9)
-        self.horizontalLayout1_10 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_10.setObjectName("horizontalLayout1_10")
-        self.label_13 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.label_13.setObjectName("label_13")
-        self.horizontalLayout1_10.addWidget(self.label_13)
-        self.lineEdit_16 = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit_16.setObjectName("lineEdit_16")
-        self.horizontalLayout1_10.addWidget(self.lineEdit_16)
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_10)
-        self.horizontalLayout1_11 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_11.setObjectName("horizontalLayout1_11")
-        self.label_14 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.label_14.setObjectName("label_14")
-        self.horizontalLayout1_11.addWidget(self.label_14)
-        self.lineEdit_17 = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit_17.setObjectName("lineEdit_17")
-        self.horizontalLayout1_11.addWidget(self.lineEdit_17)
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_11)
-        self.horizontalLayout1_12 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_12.setObjectName("horizontalLayout1_12")
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_12)
-        self.horizontalLayout1_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout1_4.setObjectName("horizontalLayout1_4")
-        self.verticalLayout_2.addLayout(self.horizontalLayout1_4)
+        self.lineEdit_47 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_47.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_47.setObjectName("lineEdit_47")
+        self.verticalLayout_2.addWidget(self.lineEdit_47)
+        self.lineEdit_48 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_48.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_48.setObjectName("lineEdit_48")
+        self.verticalLayout_2.addWidget(self.lineEdit_48)
+        self.lineEdit_49 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_49.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_49.setObjectName("lineEdit_49")
+        self.verticalLayout_2.addWidget(self.lineEdit_49)
+        self.lineEdit_50 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_50.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_50.setObjectName("lineEdit_50")
+        self.verticalLayout_2.addWidget(self.lineEdit_50)
+        self.lineEdit_51 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_51.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_51.setObjectName("lineEdit_51")
+        self.verticalLayout_2.addWidget(self.lineEdit_51)
+        self.lineEdit_52 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_52.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_52.setObjectName("lineEdit_52")
+        self.verticalLayout_2.addWidget(self.lineEdit_52)
+        self.lineEdit_53 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_53.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_53.setObjectName("lineEdit_53")
+        self.verticalLayout_2.addWidget(self.lineEdit_53)
+        self.lineEdit_54 = QtWidgets.QLineEdit(self.params_1)
+        self.lineEdit_54.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_54.setObjectName("lineEdit_54")
+        self.verticalLayout_2.addWidget(self.lineEdit_54)
+        self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.verticalLayout_2)
+        self.verticalLayout_3.addLayout(self.formLayout)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem)
+        self.horizontalLayout_2.addWidget(self.params_1)
+        self.params_2 = QtWidgets.QFrame(Form)
+        self.params_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius: 20px; ")
+        self.params_2.setObjectName("params_2")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.params_2)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.label_58 = QtWidgets.QLabel(self.params_2)
+        self.label_58.setStyleSheet("color: rgb(0, 0, 255);\n"
+"font: 300 24px\"Segoe UI\"; padding-top:10px;\n"
+"")
+        self.label_58.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_58.setObjectName("label_58")
+        self.verticalLayout_4.addWidget(self.label_58)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.label_49 = QtWidgets.QLabel(self.params_2)
+        self.label_49.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_49.setObjectName("label_49")
+        self.verticalLayout_5.addWidget(self.label_49)
+        self.label_63 = QtWidgets.QLabel(self.params_2)
+        self.label_63.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_63.setObjectName("label_63")
+        self.verticalLayout_5.addWidget(self.label_63)
+        self.label_64 = QtWidgets.QLabel(self.params_2)
+        self.label_64.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_64.setObjectName("label_64")
+        self.verticalLayout_5.addWidget(self.label_64)
+        self.label_65 = QtWidgets.QLabel(self.params_2)
+        self.label_65.setStyleSheet("color: rgb(45, 44, 45);\n"
+"font: 300 14px \"Segoe UI\";")
+        self.label_65.setObjectName("label_65")
+        self.verticalLayout_5.addWidget(self.label_65)
+        self.horizontalLayout.addLayout(self.verticalLayout_5)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.lineEdit_55 = QtWidgets.QLineEdit(self.params_2)
+        self.lineEdit_55.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_55.setObjectName("lineEdit_55")
+        self.verticalLayout_6.addWidget(self.lineEdit_55)
+        self.lineEdit_60 = QtWidgets.QLineEdit(self.params_2)
+        self.lineEdit_60.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_60.setObjectName("lineEdit_60")
+        self.verticalLayout_6.addWidget(self.lineEdit_60)
+        self.lineEdit_61 = QtWidgets.QLineEdit(self.params_2)
+        self.lineEdit_61.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_61.setObjectName("lineEdit_61")
+        self.verticalLayout_6.addWidget(self.lineEdit_61)
+        self.lineEdit_62 = QtWidgets.QLineEdit(self.params_2)
+        self.lineEdit_62.setStyleSheet("     border-width: 0.5px;\n"
+"     border-style: solid;\n"
+"     border-radius: 4px;\n"
+"border-color: #8f8f8f\n"
+"")
+        self.lineEdit_62.setObjectName("lineEdit_62")
+        self.verticalLayout_6.addWidget(self.lineEdit_62)
+        self.horizontalLayout.addLayout(self.verticalLayout_6)
+        self.verticalLayout_4.addLayout(self.horizontalLayout)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem1)
+        self.horizontalLayout_2.addWidget(self.params_2)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_2)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem2)
         self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(10, 350, 471, 24))
-        self.pushButton.setObjectName("full_menu_widget")
+        self.pushButton.setStyleSheet("background-color: blue;\n"
+"     border-style: outset;\n"
+"     border-radius: 10px;\n"
+"     border-color: beige;\n"
+"    font: 300 20px \"Segoe UI\";\n"
+"color: white;\n"
+"     padding: 6px;")
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout_7.addWidget(self.pushButton)
+        self.verticalLayout_8.addLayout(self.verticalLayout_7)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -131,19 +242,21 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Параметры маятника"))
-        self.label_4.setText(_translate("Form", "Масса диска"))
-        self.label_8.setText(_translate("Form", "Масса оси"))
-        self.label_11.setText(_translate("Form", "Радиус диска"))
-        self.label_10.setText(_translate("Form", "Шаг измерений"))
-        self.label_9.setText(_translate("Form", "Время измерений"))
-        self.label_2.setText(_translate("Form", "Начальная координата"))
-        self.label_5.setText(_translate("Form", "Параметры ген.алгоритма"))
-        self.label_6.setText(_translate("Form", "Начальная скорость"))
-        self.label_12.setText(_translate("Form", "Длина нити"))
-        self.label_13.setText(_translate("Form", "Количество особей"))
-        self.label_14.setText(_translate("Form", "Количество поколений"))
-        self.pushButton.setText(_translate("Form", "Верхняя граница желаемой траектории"))
+        self.label_50.setText(_translate("Form", "Параметры маятника"))
+        self.label_48.setText(_translate("Form", "Масса диска"))
+        self.label_51.setText(_translate("Form", "Масса оси"))
+        self.label_52.setText(_translate("Form", "Радиус диска"))
+        self.label_53.setText(_translate("Form", "Шаг измерений"))
+        self.label_54.setText(_translate("Form", "Время измерений"))
+        self.label_55.setText(_translate("Form", "Начальная координата"))
+        self.label_56.setText(_translate("Form", "Начальная скорость"))
+        self.label_57.setText(_translate("Form", "Длина пути"))
+        self.label_58.setText(_translate("Form", "Параметры ген.алгоритма"))
+        self.label_49.setText(_translate("Form", "Количество особей"))
+        self.label_63.setText(_translate("Form", "Количество поколений"))
+        self.label_64.setText(_translate("Form", "Верхняя граница желаемой траектории"))
+        self.label_65.setText(_translate("Form", "Нижняя граница желаемой траектории"))
+        self.pushButton.setText(_translate("Form", "Сохранить"))
 
 class Data_Widget(QtWidgets.QWidget, Ui_Form):
     def __init__(self):
