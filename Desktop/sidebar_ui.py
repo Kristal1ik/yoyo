@@ -130,7 +130,6 @@ class Ui_MainWindow(object):
         self.ui_form = Data_Widget()
         self.ui_form.setObjectName("widget_data")
         self.gridLayout_2.addWidget(self.ui_form)
-        self.ui_form.pushButton.setObjectName("full_menu_widget")
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
