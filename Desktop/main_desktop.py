@@ -30,8 +30,12 @@ class MainWindow(QMainWindow):
 
     def on_home_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(0)
+        # self.ui.widget_data.comboBox.activated.connect(self.onActivated())
+        print(self.ui.widget_data.comboBox)
         # self.ui.stackedWidget.addWidget(QPushButton)
-
+    def onActivated(self):
+        text = self.ui.widget_data.comboBox.currentText()
+        print(text)
     def on_dashborad_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(1)
 
@@ -42,7 +46,6 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(3)
 
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
@@ -50,8 +53,8 @@ if __name__ == "__main__":
     style_file.open(QFile.ReadOnly | QFile.Text)
     style_stream = QTextStream(style_file)
     app.setStyleSheet(style_stream.readAll())
+    print("fgyhuj")
 
     window = MainWindow()
     window.show()
-
-    sys.exit(app.exec())
+    sys.exit(app.exec_())
