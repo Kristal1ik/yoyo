@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QPushButton
 
 from widget_data import Data_Widget
+from base_widget import Base_Widget
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -127,30 +128,24 @@ class Ui_MainWindow(object):
         # self.save_btn = QtWidgets.QPushButton(self.page)
         # self.save_btn.setObjectName("full_menu_widget")
         # self.gridLayout_2.addWidget(self.save_btn, 1, 0, 1, 1)
+
         self.widget_data = Data_Widget()
         self.widget_data.setObjectName("widget_data")
-        # self.widget_data.setStyleSheet("background-color:red")
         self.gridLayout_2.addWidget(self.widget_data)
+
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.page_2)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.label_5 = QtWidgets.QLabel(self.page_2)
-        self.label_5.setFont(font)
-        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout_3.addWidget(self.label_5, 0, 0, 1, 1)
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.page_3)
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.label_6 = QtWidgets.QLabel(self.page_3)
-        self.label_6.setFont(font)
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout_4.addWidget(self.label_6, 0, 0, 1, 1)
+        self.widget_base = Base_Widget()
+        self.widget_base.setObjectName("widget_base")
+        self.gridLayout_4.addWidget(self.widget_base)
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QtWidgets.QWidget()
         self.page_4.setObjectName("page_4")
@@ -196,7 +191,5 @@ class Ui_MainWindow(object):
         self.exit_btn_2.setText(_translate("MainWindow", "Exit"))
         # self.save_btn.setText(_translate("MainWindow", "Сохранить"))
 
-        self.label_5.setText(_translate("MainWindow", "Мат. модель"))
-        self.label_6.setText(_translate("MainWindow", "База правил"))
+        # self.label_5.setText(_translate("MainWindow", "Мат. модель"))
         self.label_7.setText(_translate("MainWindow", "Графики"))
-
