@@ -89,10 +89,9 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.pushButton.setText(_translate("Form", "Применить к модели"))
-        self.pushButton_3.setText(_translate("Form", "PushButton"))
-        self.pushButton_2.setText(_translate("Form", "PushButton"))
+
         self.pushButton_3.setIcon(QtGui.QIcon("static/export.png"))
-        self.pushButton_3.setIcon(QtGui.QIcon("static/import.png"))
+        self.pushButton_2.setIcon(QtGui.QIcon("static/import.png"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("Form", "Правило 1"))
         item = self.tableWidget.verticalHeaderItem(1)
@@ -125,6 +124,8 @@ class Ui_Form(object):
         item.setText(_translate("Form", "с3"))
         item = self.tableWidget.horizontalHeaderItem(11)
         item.setText(_translate("Form", "d3"))
+        self.comboBox.addItem("Максвелла")
+        self.comboBox.addItem("Перевернутый")
 
 
 class Base_Widget(QtWidgets.QWidget, Ui_Form):
