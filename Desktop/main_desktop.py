@@ -4,6 +4,7 @@ from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
 from sidebar_ui import Ui_MainWindow
 
+comboBox_state = "Максвелла"
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -30,7 +31,7 @@ class MainWindow(QMainWindow):
 
     def on_home_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(0)
-        # self.ui.widget_data.comboBox.activated.connect(self.onActivated())
+        self.ui.widget_data.comboBox.activated.connect(self.onActivated)
         print(self.ui.widget_data.comboBox)
         # self.ui.stackedWidget.addWidget(QPushButton)
     def onActivated(self):
