@@ -81,6 +81,56 @@
 		padding: 8px 15px 50px 10px;
 		color: #ffffff;
 	}
-/*= END
-  ==================================================== */
 
+    #comboBox {
+        background: rgb(255, 255, 255);
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(235, 235, 235);
+        border-radius: 4px;
+        background-color: #8f8f8f
+    }
+
+    #comboBox:hover {
+        border-color: rgb(0, 0, 255);
+    }
+
+    #comboBox:on {
+        border-bottom-width: 3px;
+        border-bottom-color: rgb(0, 95, 185);
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    #comboBox::drop-down:on {
+        border-bottom-right-radius: 0px;
+    }
+
+    #comboBox QAbstractItemView {
+        background: #8f8f8f;
+        border-style: solid;
+        selection-background-color: rgb(0, 0, 255);
+        selection-color: #f6f6ff;
+    }
+
+    #comboBox::drop-down {
+        background: rgb(255, 255, 255);
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(255, 255, 255);
+        border-radius: 4px;
+    }
+
+    #comboBox::down-arrow {
+        width: 13px;
+        height: 13px;
+		color: #0000ff;
+        image: url(static/dropdown_arrow.svg);
+    }
+
+    #comboBox::down-arrow:on {
+        width: 13px;
+        height: 13px;
+        color: #0000ff;
+        image: url(static/dropdown_arrow.svg);
+    }
