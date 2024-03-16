@@ -14,7 +14,7 @@ t = np.arange(0.0, Tmax, dt)
 
 y = 0
 th = pi / 3 
-x = -
+x = 0
 z = 0
 
 state = np.array([th, y, x, z])
