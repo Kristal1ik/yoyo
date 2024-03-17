@@ -47,10 +47,13 @@ class MainWindow(QMainWindow):
         # k = 0.1
         # e = 0.000001
 
-        self.L = 1.0  # длина стержня
-        self.m = 0.5
-        M = 1.0
-
+        self.L_inv = 1.5  # длина стержня
+        self.m_inv = 0.5  # масса груза
+        self.M_inv = 1.0  # масса тележки
+        self.dt_inv = 0.01  # шаг измерений
+        self.T_inv = 60  # времня измерений
+        self.x0_inv = 0.05  # начальная координата
+        self.v0_inv = 0  # начальная скорость
     def on_stackedWidget_currentChanged(self, index):
 
         btn_list = self.ui.icon_only_widget.findChildren(QPushButton) \
@@ -73,10 +76,51 @@ class MainWindow(QMainWindow):
 
     def click_data_maxwell(self):
         print("max")
+        try:
+            self.m = float(self.widget_data.lineEdit_47.text())
+            self.maxis = float(self.widget_data.lineEdit_48.text())
+            self.r = float(self.widget_data.lineEdit_49.text())
+            self.dt = float(self.widget_data.lineEdit_50.text())
+            self.T = float(self.widget_data.lineEdit_51.text())
+            self.x0 = float(self.widget_data.lineEdit_52.text())
+            self.v0 = float(self.widget_data.lineEdit_53.text())
+            self.l = float(self.widget_data.lineEdit_54.text())
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Данные сохранены!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+            return
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Некорректные данные!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+            return
 
     def click_data_inverted(self):
         print("inv")
-
+        try:
+            self.L_inv = float(self.widget_data.lineEdit_47.text())
+            self.m_inv = float(self.widget_data.lineEdit_48.text())
+            self.M_inv = float(self.widget_data.lineEdit_49.text())
+            self.dt_inv = float(self.widget_data.lineEdit_50.text())
+            self.T_inv = float(self.widget_data.lineEdit_51.text())
+            self.x0_inv = float(self.widget_data.lineEdit_52.text())
+            self.v0_inv = float(self.widget_data.lineEdit_53.text())
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Данные сохранены!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Некорректные данные!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+            return
     def onActivated(self):
         text = self.widget_data.comboBox.currentText().strip()
         print(self.widget_data.comboBox)
