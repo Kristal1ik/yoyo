@@ -1,7 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCheckBox, QBoxLayout, QVBoxLayout, QWidget, \
-    QMessageBox
+    QMessageBox, QFileDialog
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
+
+from Desktop.base_widget import Base_Widget
 from sidebar_ui import Ui_MainWindow
 from widget_data_inverted import Data_Widget_Inverted
 from widget_data import Data_Widget
@@ -153,8 +155,27 @@ class MainWindow(QMainWindow):
             # self.pg_widget_maxwell = PyGameWidget(Maths_Model_Maxwell)
             self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
             self.ui.gridLayout_3.addWidget(self.pg_widget_maxwell)
-
+    def click_base_maxwell(self):
+        filename, filetype = QFileDialog.getOpenFileName(self,
+                                                         "Выбрать файл",
+                                                         ".",
+                                                         "Text Files(*.txt)")
+        print(filename)
+        if filename:
+            with open(filename, encoding='utf8') as f:
+                text_file = ''.join(f.readlines())
+                print(text_file)
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Файл не выбран!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
     def on_orders_btn_2_toggled(self):
+        self.widget_base = Base_Widget()
+        self.widget_base.setObjectName("widget_base")
+        self.ui.gridLayout_4.addWidget(self.widget_base)
+        self.widget_base.pushButton_3.clicked.connect(self.click_base_maxwell)
         self.ui.stackedWidget.setCurrentIndex(2)
 
     def on_products_btn_2_toggled(self):
