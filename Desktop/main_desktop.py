@@ -56,6 +56,7 @@ class MainWindow(QMainWindow):
         self.T_inv = 60  # времня измерений
         self.x0_inv = 0.05  # начальная координата
         self.v0_inv = 0  # начальная скорость
+
     def on_stackedWidget_currentChanged(self, index):
 
         btn_list = self.ui.icon_only_widget.findChildren(QPushButton) \
@@ -123,6 +124,7 @@ class MainWindow(QMainWindow):
             msg.setWindowTitle("Уведомление")
             msg.exec_()
             return
+
     def onActivated(self):
         text = self.widget_data.comboBox.currentText().strip()
         print(self.widget_data.comboBox)
@@ -155,7 +157,8 @@ class MainWindow(QMainWindow):
             # self.pg_widget_maxwell = PyGameWidget(Maths_Model_Maxwell)
             self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
             self.ui.gridLayout_3.addWidget(self.pg_widget_maxwell)
-    def click_base_maxwell(self):
+
+    def click_open_base_maxwell(self):
         filename, filetype = QFileDialog.getOpenFileName(self,
                                                          "Выбрать файл",
                                                          ".",
@@ -171,11 +174,37 @@ class MainWindow(QMainWindow):
             msg.setText("Файл не выбран!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
+
+    def click_save_base_maxwell(self):
+        filename, ok = QFileDialog.getSaveFileName(self,
+                                                   "Сохранить файл",
+                                                   ".",
+                                                   "Text Files(*.txt)")
+        if filename:
+            with open(filename, "w") as file:
+                # file.write(self.textEdit1.toPlainText())
+                file.write("df")
+                file.close()
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Файл <br><b>{}</b> <br> успешно сохранён!".format(filename.split('/')[-1]))
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Имя файла не указано!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+
     def on_orders_btn_2_toggled(self):
         self.widget_base = Base_Widget()
         self.widget_base.setObjectName("widget_base")
         self.ui.gridLayout_4.addWidget(self.widget_base)
-        self.widget_base.pushButton_3.clicked.connect(self.click_base_maxwell)
+        self.widget_base.pushButton_3.clicked.connect(self.click_open_base_maxwell)
+        self.widget_base.pushButton_2.clicked.connect(self.click_save_base_maxwell)
+
         self.ui.stackedWidget.setCurrentIndex(2)
 
     def on_products_btn_2_toggled(self):
