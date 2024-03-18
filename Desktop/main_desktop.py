@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCheckBox, QBoxLayout, QVBoxLayout, QWidget, \
     QMessageBox, QFileDialog
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from Desktop.base_widget import Base_Widget
 from sidebar_ui import Ui_MainWindow
@@ -9,7 +10,7 @@ from widget_data_inverted import Data_Widget_Inverted
 from widget_data import Data_Widget
 from math_model_maxwell_widget import Math_Model_Maxwell_Widget
 from graph_maxwell import Graph_Maxwell
-
+from global_vars import Global_Vars
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -18,6 +19,7 @@ class MainWindow(QMainWindow):
         self.data_maxwell = False
         self.pg_max_count = False
         self.graph_maxwell_count = False
+        self.base_maxwell = False
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -26,36 +28,19 @@ class MainWindow(QMainWindow):
 
         self.widget_data_inverted = Data_Widget_Inverted()
         self.widget_data_inverted.setObjectName("widget_data_inverted")
+
         self.widget_data = Data_Widget()
         self.widget_data.setObjectName("widget_data")
         self.ui.gridLayout_2.addWidget(self.widget_data)
+
+        self.widget_base = Base_Widget()
+        self.widget_base.setObjectName("widget_base")
+
         self.ui.home_btn_2.setChecked(True)
 
         self.x = []
         self.v = []
         self.w = []
-        self.m = 0.5  # масса диска
-        self.g = 9.8
-        self.maxis = 0.01  # масса оси
-        self.r = 0.002  # радиус диска !
-        self.R = 0.03  # радиус оси
-        self.dt = 0.01  # шаг измерений
-        self.T = 60  # времня измерений
-        self.x0 = 0.05  # начальная координата
-        self.v0 = 0  # начальная скорость
-        self.l = 0.5  # длина пути
-        # F1 = -20
-        # F2 = 20
-        # k = 0.1
-        # e = 0.000001
-
-        self.L_inv = 1.5  # длина стержня
-        self.m_inv = 0.5  # масса груза
-        self.M_inv = 1.0  # масса тележки
-        self.dt_inv = 0.01  # шаг измерений
-        self.T_inv = 60  # времня измерений
-        self.x0_inv = 0.05  # начальная координата
-        self.v0_inv = 0  # начальная скорость
 
     def on_stackedWidget_currentChanged(self, index):
 
@@ -78,23 +63,45 @@ class MainWindow(QMainWindow):
         # print(self.widget_data.comboBox)
 
     def click_data_maxwell(self):
-        print("max")
         try:
-            self.m = float(self.widget_data.lineEdit_47.text())
-            self.maxis = float(self.widget_data.lineEdit_48.text())
-            self.r = float(self.widget_data.lineEdit_49.text())
-            self.dt = float(self.widget_data.lineEdit_50.text())
-            self.T = float(self.widget_data.lineEdit_51.text())
-            self.x0 = float(self.widget_data.lineEdit_52.text())
-            self.v0 = float(self.widget_data.lineEdit_53.text())
-            self.l = float(self.widget_data.lineEdit_54.text())
+            print(Global_Vars.m)
+            Global_Vars.m = float(self.widget_data.lineEdit_47.text())
+            Global_Vars.maxis = float(self.widget_data.lineEdit_48.text())
+            Global_Vars.r = float(self.widget_data.lineEdit_49.text())
+            Global_Vars.dt = float(self.widget_data.lineEdit_50.text())
+            Global_Vars.T = int(self.widget_data.lineEdit_51.text())
+            Global_Vars.x0 = float(self.widget_data.lineEdit_52.text())
+            Global_Vars.v0 = float(self.widget_data.lineEdit_53.text())
+            Global_Vars.l = float(self.widget_data.lineEdit_54.text())
+            Global_Vars.x1 = float(self.widget_data.lineEdit_61.text())
+            Global_Vars.x2 = float(self.widget_data.lineEdit_62.text())
+            if Global_Vars.l < Global_Vars.x2 + 0.05:
+                raise ValueError
+            elif Global_Vars.x1 > Global_Vars.x2:
+                raise Warning
+
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Information)
             msg.setText("Данные сохранены!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
             return
-        except:
+
+        except Warning:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Некорректные данные:\nНижняя граница должна быть больше вкрхней границы!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+        except ValueError:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Некорректные данные:\nНижняя граница должна быть меньше длины пути!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+            return
+        except Exception as e:
+            print(e)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText("Некорректные данные!")
@@ -105,15 +112,15 @@ class MainWindow(QMainWindow):
     def click_data_inverted(self):
         print("inv")
         try:
-            self.L_inv = float(self.widget_data.lineEdit_47.text())
-            self.m_inv = float(self.widget_data.lineEdit_48.text())
-            self.M_inv = float(self.widget_data.lineEdit_49.text())
-            self.dt_inv = float(self.widget_data.lineEdit_50.text())
-            self.T_inv = float(self.widget_data.lineEdit_51.text())
-            self.x0_inv = float(self.widget_data.lineEdit_52.text())
-            self.v0_inv = float(self.widget_data.lineEdit_53.text())
+            Global_Vars.L_inv = float(self.widget_data.lineEdit_47.text())
+            Global_Vars.m_inv = float(self.widget_data.lineEdit_48.text())
+            Global_Vars.M_inv = float(self.widget_data.lineEdit_49.text())
+            Global_Vars.dt_inv = float(self.widget_data.lineEdit_50.text())
+            Global_Vars.T_inv = float(self.widget_data.lineEdit_51.text())
+            Global_Vars.x0_inv = float(self.widget_data.lineEdit_52.text())
+            Global_Vars.v0_inv = float(self.widget_data.lineEdit_53.text())
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Information)
             msg.setText("Данные сохранены!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
@@ -138,23 +145,19 @@ class MainWindow(QMainWindow):
             self.widget_data.close()
             self.widget_data = Data_Widget()
             self.widget_data.setObjectName("widget_data")
-            # del self.widget_data
         else:
             self.widget_data.comboBox.setCurrentText("Максвелла")
             self.widget_data_inverted.comboBox.setCurrentText("Перевернутый   ")
             self.widget_data.comboBox.activated.connect(self.onActivated)
-            # self.widget_data.comboBox.setCurrentText("Перевернутый   ")
             self.ui.gridLayout_2.replaceWidget(self.widget_data_inverted, self.widget_data)
             self.widget_data_inverted.close()
             self.widget_data_inverted = Data_Widget_Inverted()
             self.widget_data_inverted.setObjectName("widget_data_inverted")
-            # del self.widget_data_inverted
 
     def on_dashborad_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(1)
         if not self.pg_max_count:
             self.pg_max_count = True
-            # self.pg_widget_maxwell = PyGameWidget(Maths_Model_Maxwell)
             self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
             self.ui.gridLayout_3.addWidget(self.pg_widget_maxwell)
 
@@ -163,17 +166,27 @@ class MainWindow(QMainWindow):
                                                          "Выбрать файл",
                                                          ".",
                                                          "Text Files(*.txt)")
-        print(filename)
         if filename:
             with open(filename, encoding='utf8') as f:
-                text_file = ''.join(f.readlines())
+
+                text_file = []
+                for line in f.readlines():
+                    text_file.extend(list(map(float, line.split(", "))))
                 print(text_file)
+                n = 0
+                for i in range(5):
+                    for j in range(12):
+                        print(text_file[n])
+                        self.widget_base.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(text_file[n])))
+                        n += 1
+                        self.widget_base.update()
         else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
+            msg.setIcon(QMessageBox.Warning)
             msg.setText("Файл не выбран!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
+            return
 
     def click_save_base_maxwell(self):
         filename, ok = QFileDialog.getSaveFileName(self,
@@ -182,8 +195,13 @@ class MainWindow(QMainWindow):
                                                    "Text Files(*.txt)")
         if filename:
             with open(filename, "w") as file:
-                # file.write(self.textEdit1.toPlainText())
-                file.write("df")
+                for i in range(self.widget_base.tableWidget.rowCount()):
+                    for j in range(self.widget_base.tableWidget.columnCount()):
+                        if j == self.widget_base.tableWidget.columnCount() - 1:
+                            file.write(self.widget_base.tableWidget.item(i, j).text())
+                        else:
+                            file.write(self.widget_base.tableWidget.item(i, j).text() + ", ")
+                    file.write("\n")
                 file.close()
 
             msg = QMessageBox()
@@ -193,18 +211,18 @@ class MainWindow(QMainWindow):
             msg.exec_()
         else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
+            msg.setIcon(QMessageBox.Warning)
             msg.setText("Имя файла не указано!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
+            return
 
     def on_orders_btn_2_toggled(self):
-        self.widget_base = Base_Widget()
-        self.widget_base.setObjectName("widget_base")
-        self.ui.gridLayout_4.addWidget(self.widget_base)
+        if not self.base_maxwell:
+            self.ui.gridLayout_4.addWidget(self.widget_base)
+            self.base_maxwell = True
         self.widget_base.pushButton_3.clicked.connect(self.click_open_base_maxwell)
         self.widget_base.pushButton_2.clicked.connect(self.click_save_base_maxwell)
-
         self.ui.stackedWidget.setCurrentIndex(2)
 
     def on_products_btn_2_toggled(self):
