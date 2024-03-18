@@ -12,6 +12,7 @@ from math_model_maxwell_widget import Math_Model_Maxwell_Widget
 from graph_maxwell import Graph_Maxwell
 from global_vars import Global_Vars
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -35,6 +36,10 @@ class MainWindow(QMainWindow):
 
         self.widget_base = Base_Widget()
         self.widget_base.setObjectName("widget_base")
+        self.widget_base_inverted = Base_Widget()
+        self.widget_base_inverted.setObjectName("widget_base_inverted")
+        self.widget_base_inverted.pushButton_3.clicked.connect(self.click_open_base_inv)
+        self.widget_base_inverted.pushButton_2.clicked.connect(self.click_save_base_maxwell)
 
         self.ui.home_btn_2.setChecked(True)
 
@@ -64,7 +69,6 @@ class MainWindow(QMainWindow):
 
     def click_data_maxwell(self):
         try:
-            print(Global_Vars.m)
             Global_Vars.m = float(self.widget_data.lineEdit_47.text())
             Global_Vars.maxis = float(self.widget_data.lineEdit_48.text())
             Global_Vars.r = float(self.widget_data.lineEdit_49.text())
@@ -166,28 +170,36 @@ class MainWindow(QMainWindow):
                                                          "Выбрать файл",
                                                          ".",
                                                          "Text Files(*.txt)")
-        if filename:
-            with open(filename, encoding='utf8') as f:
+        try:
+            if filename:
+                with open(filename, encoding='utf8') as f:
 
-                text_file = []
-                for line in f.readlines():
-                    text_file.extend(list(map(float, line.split(", "))))
-                print(text_file)
-                n = 0
-                for i in range(5):
-                    for j in range(12):
-                        print(text_file[n])
-                        self.widget_base.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(text_file[n])))
-                        n += 1
-                        self.widget_base.update()
-        else:
+                    text_file = []
+                    for line in f.readlines():
+                        text_file.extend(list(map(float, line.split(", "))))
+                    print(text_file)
+                    n = 0
+                    for i in range(5):
+                        for j in range(12):
+                            print(text_file[n])
+                            self.widget_base.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(text_file[n])))
+                            n += 1
+                            self.widget_base.update()
+            else:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText("Файл не выбран!")
+                msg.setWindowTitle("Уведомление")
+                msg.exec_()
+                return
+        except Exception as e:
+            print(e)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setText("Файл не выбран!")
+            msg.setText("Некорректные данные!")
             msg.setWindowTitle("Уведомление")
             msg.exec_()
             return
-
     def click_save_base_maxwell(self):
         filename, ok = QFileDialog.getSaveFileName(self,
                                                    "Сохранить файл",
@@ -217,13 +229,75 @@ class MainWindow(QMainWindow):
             msg.exec_()
             return
 
+    def click_open_base_inv(self):
+        filename, filetype = QFileDialog.getOpenFileName(self,
+                                                         "Выбрать файл",
+                                                         ".",
+                                                         "Text Files(*.txt)")
+        try:
+            if filename:
+                with open(filename, encoding='utf8') as f:
+
+                    text_file = []
+                    for line in f.readlines():
+                        text_file.extend(list(map(float, line.split(", "))))
+                    print(text_file)
+                    n = 0
+                    for i in range(5):
+                        for j in range(12):
+                            print(text_file[n])
+                            self.widget_base_inverted.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(text_file[n])))
+                            n += 1
+                            self.widget_base_inverted.update()
+            else:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText("Файл не выбран!")
+                msg.setWindowTitle("Уведомление")
+                msg.exec_()
+                return
+        except Exception as e:
+            print(e)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Некорректные данные!")
+            msg.setWindowTitle("Уведомление")
+            msg.exec_()
+            return
     def on_orders_btn_2_toggled(self):
         if not self.base_maxwell:
             self.ui.gridLayout_4.addWidget(self.widget_base)
             self.base_maxwell = True
         self.widget_base.pushButton_3.clicked.connect(self.click_open_base_maxwell)
         self.widget_base.pushButton_2.clicked.connect(self.click_save_base_maxwell)
+        self.widget_base.comboBox.activated.connect(self.onActivated3)
         self.ui.stackedWidget.setCurrentIndex(2)
+
+    def onActivated3(self):
+        text = self.widget_base.comboBox.currentText().strip()
+        print(self.widget_base.comboBox)
+        print(text)
+        print(self.widget_base.comboBox.currentText())
+        if text == "Перевернутый":
+            self.widget_base_inverted.comboBox.setCurrentText("Перевернутый   ")
+            self.widget_base.comboBox.setCurrentText("Максвелла")
+            self.widget_base_inverted.comboBox.activated.connect(self.onActivated3)
+            self.ui.gridLayout_4.replaceWidget(self.widget_base, self.widget_base_inverted)
+            self.widget_base.close()
+            self.widget_base = Base_Widget()
+            self.widget_base.setObjectName("widget_base")
+            self.widget_base.pushButton_3.clicked.connect(self.click_open_base_maxwell)
+            self.widget_base.pushButton_2.clicked.connect(self.click_save_base_maxwell)
+        else:
+            self.widget_base.comboBox.setCurrentText("Максвелла")
+            self.widget_base_inverted.comboBox.setCurrentText("Перевернутый   ")
+            self.widget_base.comboBox.activated.connect(self.onActivated3)
+            self.ui.gridLayout_4.replaceWidget(self.widget_base_inverted, self.widget_base)
+            self.widget_base_inverted.close()
+            self.widget_base_inverted = Base_Widget()
+            self.widget_base_inverted.setObjectName("widget_base_inverted")
+            self.widget_base_inverted.pushButton_3.clicked.connect(self.click_open_base_maxwell)
+            self.widget_base_inverted.pushButton_2.clicked.connect(self.click_save_base_inv)
 
     def on_products_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(3)
