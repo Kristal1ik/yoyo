@@ -41,11 +41,12 @@ class MainWindow(QMainWindow):
         self.widget_base_inverted.pushButton_3.clicked.connect(self.click_open_base_inv)
         self.widget_base_inverted.pushButton_2.clicked.connect(self.click_save_base_maxwell)
 
-        self.ui.home_btn_2.setChecked(True)
+        self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
 
-        self.x = []
-        self.v = []
-        self.w = []
+        self.graph_maxwell = Graph_Maxwell()
+        self.ui.gridLayout_5.addWidget(self.graph_maxwell)
+
+        self.ui.home_btn_2.setChecked(True)
 
     def on_stackedWidget_currentChanged(self, index):
 
@@ -149,6 +150,7 @@ class MainWindow(QMainWindow):
             self.widget_data.close()
             self.widget_data = Data_Widget()
             self.widget_data.setObjectName("widget_data")
+            self.widget_data.pushButton.clicked.connect(self.click_data_maxwell)
         else:
             self.widget_data.comboBox.setCurrentText("Максвелла")
             self.widget_data_inverted.comboBox.setCurrentText("Перевернутый   ")
@@ -157,13 +159,24 @@ class MainWindow(QMainWindow):
             self.widget_data_inverted.close()
             self.widget_data_inverted = Data_Widget_Inverted()
             self.widget_data_inverted.setObjectName("widget_data_inverted")
+            self.widget_data_inverted.pushButton.clicked.connect(self.click_data_inverted)
+
+    def cont(self):
+        # self.img.start()
+        self.pg_widget_maxwell.img.start()
+        # self.start()
+
+
+    def stop(self):
+        self.pg_widget_maxwell.img.stop()
 
     def on_dashborad_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(1)
         if not self.pg_max_count:
             self.pg_max_count = True
-            self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
             self.ui.gridLayout_3.addWidget(self.pg_widget_maxwell)
+        self.pg_widget_maxwell.pushButton.clicked.connect(self.cont)
+        self.pg_widget_maxwell.pushButton2.clicked.connect(self.stop)
 
     def click_open_base_maxwell(self):
         filename, filetype = QFileDialog.getOpenFileName(self,
@@ -200,6 +213,7 @@ class MainWindow(QMainWindow):
             msg.setWindowTitle("Уведомление")
             msg.exec_()
             return
+
     def click_save_base_maxwell(self):
         filename, ok = QFileDialog.getSaveFileName(self,
                                                    "Сохранить файл",
@@ -246,7 +260,8 @@ class MainWindow(QMainWindow):
                     for i in range(5):
                         for j in range(12):
                             print(text_file[n])
-                            self.widget_base_inverted.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(text_file[n])))
+                            self.widget_base_inverted.tableWidget.setItem(i, j,
+                                                                          QtWidgets.QTableWidgetItem(str(text_file[n])))
                             n += 1
                             self.widget_base_inverted.update()
             else:
@@ -264,6 +279,22 @@ class MainWindow(QMainWindow):
             msg.setWindowTitle("Уведомление")
             msg.exec_()
             return
+
+    def base_maxwell_button_change(self):
+        Global_Vars.base_maxwell_button = True
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Данные применены!")
+        msg.setWindowTitle("Уведомление")
+        msg.exec_()
+
+        self.graph_maxwell.close()
+        self.pg_widget_maxwell.close()
+        self.graph_maxwell = Graph_Maxwell()
+        self.ui.gridLayout_5.addWidget(self.graph_maxwell)
+        self.pg_widget_maxwell = Math_Model_Maxwell_Widget()
+        self.ui.gridLayout_3.addWidget(self.pg_widget_maxwell)
+
     def on_orders_btn_2_toggled(self):
         if not self.base_maxwell:
             self.ui.gridLayout_4.addWidget(self.widget_base)
@@ -271,6 +302,7 @@ class MainWindow(QMainWindow):
         self.widget_base.pushButton_3.clicked.connect(self.click_open_base_maxwell)
         self.widget_base.pushButton_2.clicked.connect(self.click_save_base_maxwell)
         self.widget_base.comboBox.activated.connect(self.onActivated3)
+        self.widget_base.pushButton.clicked.connect(self.base_maxwell_button_change)
         self.ui.stackedWidget.setCurrentIndex(2)
 
     def onActivated3(self):
@@ -303,7 +335,6 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(3)
         if not self.graph_maxwell_count:
             self.graph_maxwell_count = True
-            self.graph_maxwell = Graph_Maxwell()
         self.ui.gridLayout_5.addWidget(self.graph_maxwell)
 
 
