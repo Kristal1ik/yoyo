@@ -34,6 +34,11 @@ class PyGameWidget(QtWidgets.QLabel):
         qp.drawImage(0, 0, self.image)
         qp.end()
 
+    def start(self):
+        self.timer.start()
+    def stop(self):
+        self.timer.stop()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
