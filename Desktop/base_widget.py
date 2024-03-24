@@ -15,7 +15,7 @@ class Ui_Form(object):
         self.horizontalLayout_3.addItem(spacerItem)
         self.comboBox = QtWidgets.QComboBox(Form)
         self.comboBox.setStyleSheet("color: rgb(45, 44, 45);\n"
-                                    "font: 300 14px \"Segoe UI\";")
+                                    "font: 300 17px \"Segoe UI\";")
         self.comboBox.setObjectName("comboBox")
         self.horizontalLayout_3.addWidget(self.comboBox)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
@@ -46,7 +46,7 @@ class Ui_Form(object):
         self.tableWidget.setStyleSheet("font: 300 14px \"Segoe UI\";")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(12)
-        self.tableWidget.setRowCount(4)
+        self.tableWidget.setRowCount(5)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -55,6 +55,8 @@ class Ui_Form(object):
         self.tableWidget.setVerticalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -99,6 +101,8 @@ class Ui_Form(object):
         item = self.tableWidget.verticalHeaderItem(2)
         item.setText(_translate("Form", "Правило 3"))
         item = self.tableWidget.verticalHeaderItem(3)
+        item.setText(_translate("Form", "Правило 4"))
+        item = self.tableWidget.verticalHeaderItem(4)
         item.setText(_translate("Form", "Правило 5"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "a1"))
@@ -125,7 +129,8 @@ class Ui_Form(object):
         item = self.tableWidget.horizontalHeaderItem(11)
         item.setText(_translate("Form", "d3"))
         self.comboBox.addItem("Максвелла")
-        self.comboBox.addItem("Перевернутый")
+        self.comboBox.addItem("Перевернутый   ")
+
 
 
 class Base_Widget(QtWidgets.QWidget, Ui_Form):
